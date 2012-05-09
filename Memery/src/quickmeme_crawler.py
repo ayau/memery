@@ -3,7 +3,7 @@ import urlparse
 from urllib2 import urlopen
 from urllib import urlretrieve
 import os
-import DatabaseConnection
+#import DatabaseConnection
 
 def download_images(url, out_folder):
     ## code from http://stackoverflow.com/questions/257409/download-image-file-from-the-html-page-source-using-python
@@ -34,7 +34,7 @@ def retrieve_image(image_tag, parsed_url, out_folder):
         outpath = os.path.join(out_folder, filename)
 
         if image_tag["src"].lower().startswith("http"):
-            if(DatabaseConnection.insertCrawlData(image_tag["src"])):
+            if(True):#DatabaseConnection.insertCrawlData(image_tag["src"])):
                 urlretrieve(image_tag["src"], outpath)
         else:
             urlretrieve(urlparse.urlunparse(parsed_url), outpath)
@@ -45,11 +45,18 @@ def retrieve_image(image_tag, parsed_url, out_folder):
         else:
             raise
 
-def get_meme_names():
-    url_base = "http://www.quickmeme.com/memes/submissions/"
+def get_meme_names(sort_by):
+    """Gets the names of memes in quickmeme's database.
+
+    sort_by: set to "submissions" to crawl in order of # featured.
+             set to "newest" to crawl in order of newest
+    
+    """
+
+    url_base = "http://www.quickmeme.com/memes/" + sort_by + "/"
     meme_names = []
 
-    for page in range(1, 3):
+    for page in range(1, 100):
         full_url = url_base + str(page) + "/"
         print "crawling " + full_url
     
@@ -72,7 +79,7 @@ def crawl_meme(meme_name):
 
 print "STARTING MEME CRAWLER"
 
-meme_names = get_meme_names()
+meme_names = get_meme_names("newest")
 
 for meme_name in meme_names:
     crawl_meme(meme_name)

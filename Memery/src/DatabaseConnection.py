@@ -138,7 +138,7 @@ def getCrawlData(crawl_id):
     db.close()
     
     if row == None:
-        break
+        return
     else:
         return row
 
