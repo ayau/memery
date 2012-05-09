@@ -83,7 +83,7 @@ def insertMeme(bg_id, text_top, text_bot, date_crawled, domain, crawl_id):
     
     return True
 
-#Return list of file_names for all background images
+#Return list of file_names for all background images. (file name, bg_id, cluster)
 def getAllBackground():
     # Open database connection
     try:
@@ -95,7 +95,7 @@ def getAllBackground():
     # prepare a cursor object using cursor() method
     cursor = db.cursor()
     
-    sql = """SELECT file_name, id from meme_template """
+    sql = """SELECT file_name, id, cluster from meme_template """
     
     
     cursor.execute(sql)
@@ -106,7 +106,7 @@ def getAllBackground():
         if row == None:
             break
         else:
-            output.append([row[0], row[1]])
+            output.append([row[0], row[1], row[2]])
     
     
     # disconnect from server
@@ -143,10 +143,8 @@ def getCrawlData(crawl_id):
         return row
 
 
-#Return True when successful. Marks a crawled item as processed
-def markAsProcessed(crawl_id):
-    # TODO
-    # to check whether it is a meme or not. Also deletes the image (if we're storing the image)
+#Return True when successful. Marks a crawled item as processed. is_meme is 1 item is meme. 0 otherwise
+def markAsProcessed(crawl_id, is_meme):
     
     # Open database connection
     try:
@@ -161,8 +159,8 @@ def markAsProcessed(crawl_id):
     now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     
     sql = "UPDATE TABLE crawl_data \
-    SET processed_at='%s', processed=1 WHERE id=%d" \
-    % (now, crawl_id)
+    SET processed_at='%s', processed=1, is_meme=%d WHERE id=%d" \
+    % (now, is_meme, crawl_id)
     
     try:
         cursor.execute(sql)
@@ -207,10 +205,7 @@ def getFirstUncraweled():
         return row[0]
 
 #Inserts new meme template picture into database. file_name => location and name of image, meme_name => scumbag stahl
-def insertMemeTemplate(file_name, meme_name):
-    
-    # TODO
-    # Make it save cluster info (1024 characters)
+def insertMemeTemplate(file_name, meme_name, cluster):
     
     # Open database connection
     try:
@@ -225,9 +220,9 @@ def insertMemeTemplate(file_name, meme_name):
     now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     
     # Prepare SQL query to INSERT a record into the database.
-    sql = "INSERT INTO meme_template(file_name, meme_name, created_at) \
-             VALUES ('%s', '%s', '%s')"\
-             % (file_name, meme_name, now)
+    sql = "INSERT INTO meme_template(file_name, meme_name, cluster, created_at) \
+             VALUES ('%s', '%s', '%s', %s')"\
+             % (file_name, meme_name, cluster, now)
     
     try:
         cursor.execute(sql)
