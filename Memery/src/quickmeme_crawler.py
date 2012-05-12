@@ -3,7 +3,7 @@ import urlparse
 from urllib2 import urlopen
 from urllib import urlretrieve
 import os
-#import DatabaseConnection
+import DatabaseConnection
 
 def download_images(url, out_folder):
     ## code from http://stackoverflow.com/questions/257409/download-image-file-from-the-html-page-source-using-python
@@ -34,7 +34,7 @@ def retrieve_image(image_tag, parsed_url, out_folder):
         outpath = os.path.join(out_folder, filename)
 
         if image_tag["src"].lower().startswith("http"):
-            if(True):#DatabaseConnection.insertCrawlData(image_tag["src"])):
+            if(DatabaseConnection.insertCrawlData(image_tag["src"])):
                 urlretrieve(image_tag["src"], outpath)
         else:
             urlretrieve(urlparse.urlunparse(parsed_url), outpath)
