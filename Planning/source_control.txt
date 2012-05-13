@@ -1,0 +1,9 @@
+Controlling the Source of the Meme
+
+It's nearly impossible to predict how a meme will be received by the Internet community, or some subcommunity.  If our goal is to produce a meme that goes viral in a positive way, we may be able to accomplish this by controlling the meme's source.  If the meme goes viral in a good way, we let it spread.  If it goes viral in a bad way, we can shut off the source that hosts the meme, limiting the spread of the meme.  Then we can try again with a slightly different meme, hoping it goes viral due to a more positive reception by the target audience.  We can keep shutting off the source and trying again until we achieve the desired result.
+
+
+Other advantages to controlling the meme source.
+-- We could track the spread of the meme by seeing on what sites (e.g., Facebook) people are finding links to our meme.
+-- We can run experiments on our memes, if we can track how they spread.  Create a control group of memes, create an experimental group.  Track the spread of the two groups.  Can use statistics to quantify the significance of the independent variable.
+

@@ -1,0 +1,1 @@
+to gather the most data, want to get the unique ID for the meme, then follow it to specific page.  This allows me to get stuff like number of views and rank
