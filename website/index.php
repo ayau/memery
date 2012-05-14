@@ -3,4 +3,8 @@
 
 <link rel="stylesheet" href="/style.css" type="text/css" />
 
-<center><img src="/images/darkercloud.png" class="logo" alt="" /></center>
+<center><img src="/images/darkcloudlogo.png" class="logo" alt="" /></center>
+
+<center><img src="meme_creator.php?meme=simply&top_text=one does not simply&bottom_text=add text to an image" alt="I don't always fail to display this meme. But when I do, I display this text instead." /></center>
+
+<center><img src="meme_creator.php?meme=bolgar&top_text=creates memery&bottom_text=becomes meme" alt="I don't always fail to display this meme. But when I do, I display this text instead." /></center>
