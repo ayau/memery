@@ -4,10 +4,15 @@ import sys
 import MySQLdb
 import datetime
 
+def connect_db():
+    return MySQLdb.connect(host="instance14279.db.xeround.com", port=9313, user="charles",
+                  passwd="falcon", db="memery")
+
+
 def insertCrawlData(crawl_id, file_name):
     # Open database connection
     try:
-        db = MySQLdb.connect("localhost", "root", "", "memery")
+        db = connect_db()
     except:
         sys.exit('Cannot get into database')
         return False
@@ -19,7 +24,7 @@ def insertCrawlData(crawl_id, file_name):
     
     # Prepare SQL query to INSERT a record into the database.
     sql = "INSERT INTO crawl_data(image_identifier, created_at, file_name) \
-             VALUES ('%d', '%s', '%s')"\
+             VALUES ('%s', '%s', '%s')"\
              % (crawl_id, now, file_name)
     
     try:
@@ -45,7 +50,7 @@ def insertCrawlData(crawl_id, file_name):
 def insertMeme(bg_id, text_top, text_bot, date_crawled, domain, crawl_id):
     # Open database connection
     try:
-        db = MySQLdb.connect("localhost", "root", "", "memery")
+        db = connect_db()
     except:
         sys.exit('Cannot get into database')
         return False
@@ -87,7 +92,7 @@ def insertMeme(bg_id, text_top, text_bot, date_crawled, domain, crawl_id):
 def getAllBackground():
     # Open database connection
     try:
-        db = MySQLdb.connect("localhost", "root", "", "memery")
+        db = connect_db()
     except:
         sys.exit('Cannot get into database')
         return -1
@@ -119,7 +124,7 @@ def getAllBackground():
 def getCrawlData(crawl_id):
     # Open database connection
     try:
-        db = MySQLdb.connect("localhost", "root", "", "memery")
+        db = connect_db()
     except:
         sys.exit('Cannot get into database')
         return
@@ -148,7 +153,7 @@ def markAsProcessed(crawl_id, is_meme):
     
     # Open database connection
     try:
-        db = MySQLdb.connect("localhost", "root", "", "memery")
+        db = connect_db()
     except:
         sys.exit('Cannot get into database')
         return False
@@ -181,7 +186,7 @@ def getFirstUncraweled():
     
     # Open database connection
     try:
-        db = MySQLdb.connect("localhost", "root", "", "memery")
+        db = connect_db()
     except:
         sys.exit('Cannot get into database')
         return
@@ -209,7 +214,7 @@ def insertMemeTemplate(file_name, meme_name, cluster):
     
     # Open database connection
     try:
-        db = MySQLdb.connect("localhost", "root", "", "memery")
+        db = connect_db()
     except:
         sys.exit('Cannot get into database')
         return False

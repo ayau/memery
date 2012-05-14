@@ -34,7 +34,7 @@ def retrieve_image(image_tag, parsed_url, out_folder):
         outpath = os.path.join(out_folder, filename)
 
         if image_tag["src"].lower().startswith("http"):
-            if(DatabaseConnection.insertCrawlData(image_tag["src"])):
+            if(DatabaseConnection.insertCrawlData(image_tag["src"], image_tag["src"])):
                 urlretrieve(image_tag["src"], outpath)
         else:
             urlretrieve(urlparse.urlunparse(parsed_url), outpath)
