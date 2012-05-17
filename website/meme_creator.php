@@ -11,7 +11,6 @@ $bottom = html_entity_decode($_GET['bottom_text']);
 $bottom = strtoupper($bottom);
 
 $meme = html_entity_decode($_GET['meme']);
-$meme = strtoupper($meme);
 
 /* check if meme id is valid
 if(empty($text))
@@ -26,7 +25,7 @@ $image_file     = 'res/meme_templates/'.$meme.'.png';
 
 
 // trust me for now...in PNG out PNG
-$mime_type          = 'image/png' ;
+$mime_type          = '/images/png' ;
 $extension          = '.png' ;
 $s_end_buffer_size  = 4096 ;
 
@@ -63,13 +62,22 @@ $outline_color = ImageColorAllocate($image,0,0,0) ;
 $px = 3;
 
 $length = 25; 
- //fatal_error(($font_size/30)*($h/500) * 3);
-while(strlen($top)/$length*(500/$w) > ($font_size/30)*($h/500) * 3 ){ //infinite loop?
+
+/*$ceil = ceil(strlen($top)/$length);
+//($font_size/30)*($h/500) * 3;
+while(count(explode('|', wordwrap($top,$length*($w/500),'|'))) > min($ceil,3) ){ //infinite loop?
 	$font_size --;
 	$length ++;
-}
+}*/
 
 $topArray = explode('|', wordwrap($top,$length*($w/500),'|')); 
+
+while(30 + $h*0.1 + 50*(count($topArray)-1) > $h*0.35){
+	$font_size--;
+	$length ++;
+	$topArray = explode('|', wordwrap($top,$length*($w/500),'|')); 
+}
+
 
 $y_top     = 30 + $h*0.1;
 $put_top_y = $y_top;
@@ -98,13 +106,22 @@ foreach ($topArray as $tp)
 $length = 25;
 $font_size = 30;
 
-while(strlen($bottom)/$length*(500/$w) > 3){
+/*$ceil = ceil(strlen($bottom)/$length);
+//fatal_error($ceil);
+while(count(explode('|', wordwrap($bottom,$length*($w/500),'|')))> min($ceil,3)){
 	$font_size --;
-	$length ++;
-}
+	$length +=1.5;
+}*/
+
 
 //Bottom
 $botArray = explode('|', wordwrap($bottom,$length*($w/500),'|')); 
+
+while(($h-30) - 45*(count($botArray)-1)*($font_size/30) < $h*0.75){
+	$font_size--;
+	$length ++;
+	$botArray = explode('|', wordwrap($bottom,$length*($w/500),'|')); 
+}
 $y_bottom = ($h-30) - 45*(count($botArray)-1)*($font_size/30);
 $put_bottom_y = $y_bottom;
 
