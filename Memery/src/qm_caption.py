@@ -6,10 +6,10 @@ import os
 
 class QM_Caption:
 
-    def __init__(self, image_source):
+    def __init__(self, image_source, meme):
         self.image_source = image_source  
-
         soup = bs(urlopen(self.get_url()))
+        self.meme = meme
 
     def get_filename(self):
         return self.image_source.split("/")[-1]

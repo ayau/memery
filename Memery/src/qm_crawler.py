@@ -35,14 +35,16 @@ class QM_Crawler:
             soup = bs(urlopen(self.full_url))
             image_tags = soup.findAll("img")
 
-if __name__ == "__main__":
+    def crawl_memes(self, num_memes):
+        """Crawls num_memes memes.  E.g., if num_memes=3, crawls 3 memes."""
+        meme_count = 0
+        for meme in self:
+            if meme_count >= num_memes: break
+            yield meme
+            meme_count+=1
 
-    now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    
-    crawler = QM_Crawler("newest")
-    for meme in crawler:
-        print "crawling: " + meme.meme_name
-        for caption in meme:
-            print "caption: " + caption.get_qm_id()
-            caption.retrieve_image("crawl at " + now)
-            
+    def crawl(self, num_memes, num_captions):
+        """Crawls num_captions captions for num_memes memes"""
+        for meme in self.crawl_memes(num_memes):
+            for caption in meme.crawl_captions(num_captions):
+                yield caption
