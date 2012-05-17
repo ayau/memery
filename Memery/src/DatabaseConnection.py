@@ -88,7 +88,7 @@ def insertMeme(bg_id, text_top, text_bot, date_crawled, domain, crawl_id):
     
     return True
 
-#Return list of file_names for all background images. (file name, bg_id, cluster)
+#Return list of file_names for all background images. (bg_id, cluster)
 def getAllBackground():
     # Open database connection
     try:
@@ -100,7 +100,7 @@ def getAllBackground():
     # prepare a cursor object using cursor() method
     cursor = db.cursor()
     
-    sql = """SELECT file_name, id, cluster from meme_template """
+    sql = """SELECT id, cluster from meme_template """
     
     
     cursor.execute(sql)
@@ -111,7 +111,7 @@ def getAllBackground():
         if row == None:
             break
         else:
-            output.append([row[0], row[1], row[2]])
+            output.append([row[0], row[1]])
     
     
     # disconnect from server
