@@ -3,12 +3,14 @@ import urlparse
 from urllib2 import urlopen
 from urllib import urlretrieve
 import os
+import re
+import auxiliary
 
 class QM_Caption:
 
     def __init__(self, image_source, meme):
         self.image_source = image_source  
-        soup = bs(urlopen(self.get_url()))
+        self.soup = bs(urlopen(self.get_url()))
         self.meme = meme
 
     def get_filename(self):
@@ -37,3 +39,17 @@ class QM_Caption:
                 urlretrieve(self.image_source, outpath)
             else:
                 raise
+
+    def get_rating(self):
+        rating_tag = self.soup.find(id="voting_rating")
+        rating_re = re.compile("\nRating: (.+)\n")
+        rating = rating_re.match(rating_tag.get_text()).group(1)
+        rating = int(auxiliary.remove_commas(rating))
+        return rating
+
+    def get_views(self):
+        views_tag = self.soup.find(id="voting_views")
+        views_re = re.compile("\n(.+) views.*\n")
+        views = views_re.match(views_tag.get_text()).group(1)
+        views = int(auxiliary.remove_commas(views))
+        return views

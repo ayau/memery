@@ -5,5 +5,7 @@ crawler = QM_Crawler(sort_by)
 #now = datetime.datetime.now().strftime('%Y-%m-%d %Hh%Mm%Ss')
 #out_folder = "Crawl of " + sort_by + " at " + now
 
-for caption in crawler.crawl(4,1):
-    print caption.get_qm_id() + " -- " + caption.meme.meme_name
+for caption in crawler.crawl(1,1):
+    print caption.get_url() + " -- " + caption.meme.meme_name
+    print "rating:", caption.get_rating()
+    print "views:", caption.get_views()
