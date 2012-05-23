@@ -1,3 +1,35 @@
 
+html{background:#76AC68;}
+body {margin:0;}
+#page-wrap {background:#76AC68;}
 
-html {background:#76AC68;}
+#top_nav{position:relative; top:-20px; width:850px; margin:0 auto}
+#top_nav div{float:left; margin:5px}
+
+@font-face {
+    font-family: gotham-medium;
+    src: url(/res/font/Gotham-Medium.ttf);
+}
+
+#container {width:900px; margin: 0 auto}
+
+.nav_button {
+	font-family:gotham-medium;
+	font-size:20px;
+	padding:7px 15px 7px 15px;
+	color:#DDD;
+	/*text-shadow: 0 -1px -1px rgba(0, 0, 0, 0.5);*/
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+ 	-webkit-transition: all 0.5s ease-in-out;
+}	
+ 
+.nav_button:hover {
+	text-decoration:none;
+	color:#FFF;
+ 	background: rgba(52, 82, 45, 0.9);
+ 	cursor:pointer;
+}
