@@ -6,6 +6,9 @@ body {margin:0;}
 #top_nav{position:relative; top:-20px; width:850px; margin:0 auto}
 #top_nav div{float:left; margin:5px}
 
+h3, td {font-family:gotham-medium;}
+#database_info{position:relative; left:100px;}
+
 @font-face {
     font-family: gotham-medium;
     src: url(/res/font/Gotham-Medium.ttf);
