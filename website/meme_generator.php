@@ -1,6 +1,6 @@
 <?php 
 	$pageTitle = "meme generator";
-	include_once "/common/header.php";
+	include_once "common/header.php";
 ?>
 <div id="container">
 	<br /><br /><br /><br />
@@ -11,7 +11,7 @@
 	<center><input id='submit' type="button" value='submit'/></center>
 	
 <?php
-	include_once "/common/footer.php"
+	include_once "common/footer.php"
 ?>
 
 	<script type="text/javascript">

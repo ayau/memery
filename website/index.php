@@ -1,6 +1,6 @@
 <?php 
 	$pageTitle = "memery";
-	include_once "/common/header.php";
+	include_once "common/header.php";
 ?>
 <div id="container">
 			<br /><br /><br /><br />
@@ -13,10 +13,10 @@
 
 <center><img src="meme_creator.php?meme=greg&top_text=creates a new popular meme generator&bottom_text=automatically adjusts the font size of longer texts to make sure they all fit" alt="I don't always fail to display this meme. But when I do, I display this text instead." /></center>
 
-<center><img src="/images/Abandon-THread-snail.gif" /></center>
+<center><img src="images/Abandon-Thread-snail.gif" /></center>
 
 </div>
 
 <?php
-	include_once "/common/footer.php"
+	include_once "common/footer.php"
 ?>

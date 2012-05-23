@@ -1,6 +1,6 @@
 <?php 
-	$pageTitle = "meme generator";
-	include_once "/common/header.php";
+	$pageTitle = "state of the base";
+	include_once "common/header.php";
 ?>
 <div id="container">
 	<br /><br /><br /><br />
@@ -16,5 +16,5 @@
 </div>
 
 <?php
-	include_once "/common/footer.php"
+	include_once "common/footer.php"
 ?>
