@@ -6,6 +6,4 @@ crawler = QM_Crawler(sort_by)
 #out_folder = "Crawl of " + sort_by + " at " + now
 
 for caption in crawler.crawl(1,1):
-    print caption.get_url() + " -- " + caption.meme.meme_name
-    print "rating:", caption.get_rating()
-    print "views:", caption.get_views()
+    a = caption

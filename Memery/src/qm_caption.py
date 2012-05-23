@@ -12,6 +12,7 @@ class QM_Caption:
         self.image_source = image_source  
         self.soup = bs(urlopen(self.get_url()))
         self.meme = meme
+        self.crawl_time = auxiliary.get_datetime()
 
     def get_filename(self):
         return self.image_source.split("/")[-1]
