@@ -7,7 +7,6 @@
 ?>
 <div id="container">
 	<br /><br />
-	
 	<table id='database_info'>
 		<tr><td colspan=2><h3>Current Progress</h3></td></tr>
 		<tr><td>Total memes crawled</td><td><?php echo $dbConnector->getMemesCrawled()?></td></tr>

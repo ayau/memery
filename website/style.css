@@ -6,13 +6,28 @@ body {margin:0;}
 #top_nav{position:relative; top:-20px; width:850px; margin:0 auto}
 #top_nav div{float:left; margin:5px}
 
-h3, td {font-family:gotham-medium;}
+h2, td, p {font-family:gotham-medium;}
+
 #database_info{position:relative; left:100px;}
 
 @font-face {
     font-family: gotham-medium;
     src: url(/res/font/Gotham-Medium.ttf);
 }
+
+.splash {width:510px; height:320px; margin: 0 10px;}
+.small {width:100px; height:100px;}
+.panel{position:relative; padding:3px; float:left; display:block; overflow:hidden;}
+.small img{width:100px; height:auto}
+.splash img{width:510px; height:auto;}
+
+#comments_container{width:600px;float:left}
+
+#rating_cloud {float:right; width:300px; height:200px; background-repeat:no-repeat; background-image:url("images/lightcloud.png")}
+#rating_cloud table {position:relative; top:30px; left:60px}
+
+#memgr_container{background:#67A358; padding:0 20px 20px 20px; border-radius: 15px; overflow:auto}
+#prev_panel{width:100px; position:relative; padding:0 3px; float:left}
 
 #container {width:900px; margin: 0 auto}
 
@@ -36,3 +51,18 @@ h3, td {font-family:gotham-medium;}
  	background: rgba(52, 82, 45, 0.9);
  	cursor:pointer;
 }
+
+.meme_settings{
+	margin:0 25px;
+	float:left;
+    position:relative;
+}
+
+
+.thumbnail_preview{
+	float:left;
+    overflow:hidden;
+    width:100px;
+    height:100px  
+}
+

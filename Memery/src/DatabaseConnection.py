@@ -9,7 +9,7 @@ def connect_db():
                   passwd="falcon", db="memery")
 
 
-def insertCrawlData(crawl_id, file_name):
+def insertCrawlData(crawl_id, file_name, rank, views):
     # Open database connection
     try:
         db = connect_db()
@@ -23,9 +23,9 @@ def insertCrawlData(crawl_id, file_name):
     now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     
     # Prepare SQL query to INSERT a record into the database.
-    sql = "INSERT INTO crawl_data(image_identifier, created_at, file_name) \
-             VALUES ('%s', '%s', '%s')"\
-             % (crawl_id, now, file_name)
+    sql = "INSERT INTO crawl_data(image_identifier, created_at, file_name, rank, views) \
+             VALUES ('%s', '%s', '%s', '%d', '%d')"\
+             % (crawl_id, now, file_name, rank, views)
     
     try:
         cursor.execute(sql)

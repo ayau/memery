@@ -9,12 +9,12 @@
 <body>
 	<div id="page-wrap">
 		<div id="header">
-			<center><img src="/images/memerylogo.png" class="logo" alt="" /></center>
+			<center><a href="/"><img src="/images/memerylogo.png" class="logo" alt="" /></a></center>
 			<div id='top_nav'>		<!--Should be part of the header -->
-				<a href="/"><div class='nav_button'>home</div></a>
+				<a href="/memgr.php"><div class='nav_button'>memgr</div></a>
 				<a href="/meme_gallery.php"><div class='nav_button'>meme gallery</div></a>
 				<a href="/meme_generator.php"><div class='nav_button'>meme generator</div></a>
 				<a href="/stateofbase.php"><div class='nav_button'>state of the base</div></a>
-				<a href="/contact.php"><div class='nav_button'>contact</div></a>
+				<a href="/custom_meme.php"><div class='nav_button'>upload</div></a>
 			</div>
 		</div>

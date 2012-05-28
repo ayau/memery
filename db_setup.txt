@@ -5,6 +5,8 @@ Drop Table IF EXISTS crawl_data;
 CREATE TABLE crawl_data (
 id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 image_identifier varchar(256) NOT NULL UNIQUE,
+rank INT,
+views INT,
 created_at DATETIME NOT NULL,
 processed_at DATETIME,
 processed boolean NOT NULL default 0,
