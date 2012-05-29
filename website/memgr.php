@@ -23,8 +23,9 @@
 	<div class='small panel'><img src="res/meme_templates/tiny/scumbag-steve-t.png" /></div>
 	<div class='small panel'><img src="res/meme_templates/tiny/futurama-fry-t.png" /></div>
 	</div>
-
-
+	<img src='images/upvote.png' width='25px'/>
+	<img style='position:relative; top:5px' src='images/downvote.png' width='25px'/>
+	
 	<div id='comments_container'>
 		<h2>Comments and whatnot</h2>
 		<p>mbei333: This meme sucks ass!!</p>
@@ -40,6 +41,7 @@
 			<tr><td>Creator</td><td>jgar4321</td></tr>
 		</table>
 	</div>
+		
 	<!--<center style='position:absolute; left:500px'><a href="/"><img src="images/lightcloud.png" class="logo" alt="" /></a></center>-->
 	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 </div>
