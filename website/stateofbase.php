@@ -1,4 +1,5 @@
-<?php 
+<?php
+	$database = 'meme_cloud'; 
 	include_once "common/base.php";
 	$pageTitle = "state of the base";
 	include_once "common/header.php";

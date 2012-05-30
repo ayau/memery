@@ -6,7 +6,7 @@ import datetime
 
 def connect_db():
     return MySQLdb.connect(host="instance14279.db.xeround.com", port=9313, user="charles",
-                  passwd="falcon", db="memery")
+                  passwd="falcon", db="meme_cloud")
 
 
 def insertCrawlData(crawl_id, file_name, rank, views):
