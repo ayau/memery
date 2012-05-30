@@ -1,10 +1,10 @@
 <?php
-	$database = 'meme_cloud'; 
 	include_once "common/base.php";
+	$db_memecloud = db_connect('meme_cloud');
 	$pageTitle = "state of the base";
 	include_once "common/header.php";
 	include_once "inc/class.dbconnector.inc.php";
-	$dbConnector = new db_connector($db);
+	$dbConnector = new db_connector($db_memecloud);
 ?>
 <div id="container">
 	<br /><br />

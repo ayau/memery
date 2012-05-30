@@ -6,6 +6,22 @@ body {margin:0;}
 #top_nav{position:relative; top:-20px; width:850px; margin:0 auto}
 #top_nav div{float:left; margin:5px}
 
+input[type="text"], input[type="password"]{
+	width:300px;
+	height:20px; 
+	padding:10px; 
+	font-size:16px; 
+	border:none;
+	-moz-box-shadow: 0px 0px 3px #333 inset;
+	-webkit-box-shadow: 0px 0px 3px #333 inset;
+	box-shadow: 0px 0px 3px #333 inset;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+
+
 h2, td, p {font-family:gotham-medium;}
 
 #database_info{position:relative; left:100px;}
@@ -66,7 +82,9 @@ h2, td, p {font-family:gotham-medium;}
     height:100px  
 }
 
-
+/*SIGN UP */
+#registerform label{background: #34522D; color: white; padding: 5px 7px; position:relative;top:-3px}
+#registerform input{display:block;}
 
 /*MEME UPLOAD*/
 #upload_container {

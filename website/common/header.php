@@ -1,6 +1,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
+<?php
+//Setting default sessions to prevent error messages
+function session_defaults() { 
+	$_SESSION['logged'] = false; 
+	$_SESSION['uid'] = 0; 
+	$_SESSION['username'] = ''; 
+	$_SESSION['cookie'] = 0; 
+	$_SESSION['remember'] = false; 
+}
+
+if (!isset($_SESSION['uid']) ) { 
+	session_defaults(); 
+}
+
+?>
+
+
+
 <head>
 	<title><?php echo $pageTitle ?></title>
 	<link rel="stylesheet" href="/style.css" type="text/css" />

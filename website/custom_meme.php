@@ -12,7 +12,7 @@
 				<p style='float:left; width:130px; padding:10px'>The 100 x 100 thumbnail for this meme</p>
 			</div>
 			<div style='margin-top:15px'>
-				<input style='height:30px; font-size:16px' type="text" size='30' placeholder='Name of Meme' value=""/>
+				<input style='width:200px' type="text" size='30' placeholder='Name of Meme' value=""/>
 				<div style='margin-top:15px;'>
 					<p style='display:inline'>Privacy:  </p>
 					<select style='height:30px; font-size:16px'>
@@ -23,7 +23,7 @@
         		</div>
         		<div style='margin-top:15px;'>
         			<p>Group</p>
-        			<input style='height:30px; font-size:16px' type="text" size='30' placeholder='Group name (Optional)' value=""/>
+        			<input style='width:200px' type="text" size='30' placeholder='Group name (Optional)' value=""/>
         		</div>
 			<div>
 		</div>

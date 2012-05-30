@@ -1,0 +1,18 @@
+Drop Table IF EXISTS users;
+
+CREATE TABLE users(
+id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+username varchar(64) NOT NULL default '',
+password char(64) binary NOT NULL default '',
+first_name varchar(64) NOT NULL default '',
+last_name varchar(64) NOT NULL default '',
+nickname varchar(64),
+created_at DATETIME NOT NULL,
+last_login DATETIME,
+cookie char(64) binary NOT NULL default '',
+session char(64) binary NOT NULL default '',
+ip varchar(16) binary NOT NULL default '',
+PRIMARY KEY (id),
+UNIQUE KEY username (username),
+UNIQUE KEY nickname (nickname)
+);

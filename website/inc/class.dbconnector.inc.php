@@ -36,7 +36,7 @@
         }
         else
         {
-            $dsn = "mysql:host=".DB_HOST.";dbname=".DB_NAME.";port=".DB_PORT;
+            $dsn = "mysql:host=".DB_HOST.";dbname=".DB_MEME_CLOUD.";port=".DB_PORT;
             $this->_db = new PDO($dsn, DB_USER, DB_PASS);
         }
     }
