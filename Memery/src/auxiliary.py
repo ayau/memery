@@ -1,8 +1,7 @@
 import datetime
 
 def remove_commas(s):
-    split = s.split(",")
-    return "".join(split)
+    return s.replace(",","")
 
 def get_datetime():
     """Returns the current date and time"""

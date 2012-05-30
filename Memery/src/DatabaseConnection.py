@@ -10,6 +10,10 @@ def connect_db():
 
 
 def insertCrawlData(crawl_id, file_name):
+
+    #crawl_id is URL
+    #file_name is URL for now
+    
     # Open database connection
     try:
         db = connect_db()
