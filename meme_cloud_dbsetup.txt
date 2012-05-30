@@ -1,0 +1,40 @@
+Drop Table IF EXISTS memes;
+Drop Table IF EXISTS meme_template;
+Drop Table IF EXISTS crawl_data;
+
+CREATE TABLE crawl_data (
+id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+image_identifier varchar(256) NOT NULL UNIQUE,
+rank INT,
+views INT,
+created_at DATETIME NOT NULL,
+processed_at DATETIME,
+processed boolean NOT NULL default 0,
+is_meme boolean NOT NULL default 0,
+file_name varchar(64) NOT NULL,
+PRIMARY KEY (id)
+);
+
+CREATE TABLE meme_template (
+id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+file_name varchar(64) UNIQUE,
+meme_name varchar(64) NOT NULL,
+cluster varchar(1024) NOT NULL,
+created_at DATETIME NOT NULL,
+PRIMARY KEY (id)
+);
+
+CREATE TABLE memes (
+id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+meme_identifier varchar(256) NOT NULL UNIQUE,
+background_id INT,
+text_top varchar(128),
+text_bot varchar(128),
+created_at DATETIME NOT NULL,
+date_crawled DATETIME NOT NULL,
+domain varchar(128),
+crawl_id INT,
+PRIMARY KEY(id),
+FOREIGN KEY(background_id) references meme_template(id),
+FOREIGN KEY(crawl_id) references crawl_data(id)
+);
