@@ -1,0 +1,2 @@
+CRAWL ON MAY 30, 2012
+crawl speed is approximately 2.3 seconds per caption (used test_crawl.py on Josh's MacBook Pro over Josh's home wireless Internet connection)

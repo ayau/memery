@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup as bs
 import urlparse
-from urllib2 import urlopen
+from urllib2 import urlopen, HTTPError
 from urllib import urlretrieve
 import os
 import re
@@ -9,8 +9,12 @@ import auxiliary
 class QM_Caption:
 
     def __init__(self, image_source, meme):
-        self.image_source = image_source  
-        self.soup = bs(urlopen(self.get_url()))
+        self.image_source = image_source
+
+        self.soup = self.get_soup()
+           
+            
+            
         self.meme = meme
         self.crawl_time = auxiliary.get_datetime()
 
@@ -54,3 +58,10 @@ class QM_Caption:
         views = views_re.match(views_tag.get_text()).group(1)
         views = int(auxiliary.remove_commas(views))
         return views
+
+    def get_soup(self):
+        try:
+            return bs(urlopen(self.get_url()))
+        except HTTPError as e:
+            print "**Retrying bs(urlopen(self.get_url())) after HTTPError**"
+            return self.get_soup()
