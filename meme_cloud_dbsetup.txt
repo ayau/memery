@@ -19,7 +19,7 @@ CREATE TABLE meme_template (
 id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 file_name varchar(64) UNIQUE,
 meme_name varchar(64) NOT NULL,
-cluster varchar(1024) NOT NULL,
+source_url varchar(128) UNIQUE,
 created_at DATETIME NOT NULL,
 PRIMARY KEY (id)
 );
