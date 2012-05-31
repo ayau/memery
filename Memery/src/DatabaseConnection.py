@@ -9,6 +9,9 @@ def connect_db():
                   passwd="falcon", db="meme_cloud")
 
 
+    #crawl_id is URL
+    #file_name is URL for now
+
 def insertCrawlData(crawl_id, file_name, rank, views):
     # Open database connection
     try:

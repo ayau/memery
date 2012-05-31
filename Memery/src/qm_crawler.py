@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup as bs
 import urlparse
 from urllib2 import urlopen
 from qm_meme import QM_Meme
-import datetime
 
 class QM_Crawler:
 

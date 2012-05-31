@@ -1,11 +1,30 @@
 from qm_crawler import QM_Crawler
+import DatabaseConnection
+import auxiliary
+from urllib2 import HTTPError
+
+
+print "START"
 
 sort_by = "popular"
 crawler = QM_Crawler(sort_by)
 #now = datetime.datetime.now().strftime('%Y-%m-%d %Hh%Mm%Ss')
 #out_folder = "Crawl of " + sort_by + " at " + now
 
-for caption in crawler.crawl(1,1):
-    print caption.get_url() + " -- " + caption.meme.meme_name
-    print "rating:", caption.get_rating()
-    print "views:", caption.get_views()
+def run_test_crawl(crawler_iterator):
+    try:
+        for caption in crawler_iterator:
+            print caption.get_qm_id(), "--", caption.meme.meme_name
+            image_source = caption.image_source
+            print "url:", caption.get_url()
+            print "image_source:", image_source 
+            print DatabaseConnection.insertCrawlData(caption.get_url(),caption.get_filename(), caption.get_rating(), caption.get_views())
+    except HTTPError as e:
+        print """HTTPError \n ** \n ** \n ** \n ** \n ** \n ** \n ** \n ** \n ** \n ** 
+
+retrying."""
+        run_test_crawl(crawler_iterator)
+    
+run_test_crawl(crawler.crawl(30,35))
+
+print "DONE"
