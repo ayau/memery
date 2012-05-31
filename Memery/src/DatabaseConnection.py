@@ -91,7 +91,7 @@ def insertMeme(bg_id, text_top, text_bot, date_crawled, domain, crawl_id):
     
     return True
 
-#Return list of file_names for all background images. (bg_id, cluster)
+#Return list of file_names for all background images. (bg_id, source_url)
 def getAllBackground():
     # Open database connection
     try:
@@ -103,7 +103,7 @@ def getAllBackground():
     # prepare a cursor object using cursor() method
     cursor = db.cursor()
     
-    sql = """SELECT id, cluster from meme_template """
+    sql = """SELECT id, source_url from meme_template """
     
     
     cursor.execute(sql)
@@ -212,8 +212,8 @@ def getFirstUncraweled():
     else:
         return row[0]
 
-#Inserts new meme template picture into database. file_name => location and name of image, meme_name => scumbag stahl
-def insertMemeTemplate(file_name, meme_name, cluster):
+#Inserts new meme template picture into database. file_name => name of image, meme_name => scumbag stahl, source_url
+def insertMemeTemplate(file_name, meme_name, source_url):
     
     # Open database connection
     try:
@@ -228,9 +228,9 @@ def insertMemeTemplate(file_name, meme_name, cluster):
     now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     
     # Prepare SQL query to INSERT a record into the database.
-    sql = "INSERT INTO meme_template(file_name, meme_name, cluster, created_at) \
+    sql = "INSERT INTO meme_template(file_name, meme_name, source_url, created_at) \
              VALUES ('%s', '%s', '%s', %s')"\
-             % (file_name, meme_name, cluster, now)
+             % (file_name, meme_name, source_url, now)
     
     try:
         cursor.execute(sql)
