@@ -45,7 +45,7 @@
 			
 			echo "<div class='user_panel_item rounded' style='background-image: url(".$crop.")'>";
 			echo "<div class='darken_hover rounded'>";
-				echo "<img class='user_panel_img' title=".$t['name']." style='opacity:0' src='".$t['src']."'/>";
+				echo "<img class='user_panel_img' title=\"".$t['name']."\" style='opacity:0' src='".$t['src']."'/>";
 			echo "</div>		
 		</div>";
 		}else{
