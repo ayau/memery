@@ -4,15 +4,16 @@
 ?>
 <div id="container">
 			<br /><br /><br /><br />
-			<div><i style='font-size:20px'>Click and drag on the image to select an area.</i></div>
+	<div class='preview_panel'>	
+		<i style='font-size:20px; display:block'>Click and drag on the image to select an area.</i>
 		<img class='meme' style='float:left' src="res/meme_templates/simply.png" />
-		<div class='meme_settings'>
+		<div class='preview_settings'>
 			<div style='overflow:auto'>
 				<div class='thumbnail_preview'><img src="res/meme_templates/simply.png" style="position: relative;" /></div>
-				<p style='float:left; width:130px; padding:10px'>The 100 x 100 thumbnail for this meme</p>
+				<p class='thumbnail_preview_text'>The 100 x 100 thumbnail for this meme</p>
 			</div>
 			<div style='margin-top:15px'>
-				<input style='width:200px' type="text" size='30' placeholder='Name of Meme' value=""/>
+				<input type="text" size='30' placeholder='Name of Meme' value=""/>
 				<div style='margin-top:15px;'>
 					<p style='display:inline'>Privacy:  </p>
 					<select style='height:30px; font-size:16px'>
@@ -22,12 +23,11 @@
 					</select>
         		</div>
         		<div style='margin-top:15px;'>
-        			<p>Group</p>
-        			<input style='width:200px' type="text" size='30' placeholder='Group name (Optional)' value=""/>
+        			<input type="text" size='30' placeholder='Group tags (Optional)' value=""/>
         		</div>
 			<div>
 		</div>
-		
+	</div>
 		<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 </div>
 

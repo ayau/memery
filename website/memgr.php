@@ -1,4 +1,5 @@
 <?php 
+	include_once "common/base.php";
 	$pageTitle = "memery";
 	include_once "common/header.php";
 ?>

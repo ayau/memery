@@ -88,7 +88,6 @@ function register(){
        		$("#error_mail").text("Sorry, that email is already in use.").show();
        	else if(r==0)
        		window.location = "/signup.php?status=completed"; 
-       	
    		},
      	error:function(){}  
   });

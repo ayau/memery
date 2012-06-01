@@ -1,4 +1,5 @@
-<?php 
+<?php
+	include_once "common/base.php"; 
 	$pageTitle = "meme generator";
 	include_once "common/header.php";
 ?>
