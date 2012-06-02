@@ -74,10 +74,10 @@
     
     
     //Retrieves a list of template uploaded by a user
-    function get_template_by_UID($uid){
+    function get_templates_by_UID($uid){
 		
         $sql = "SELECT * FROM templates 
-			WHERE created_by =:uid"; 
+			WHERE created_by =:uid ORDER BY id DESC"; 
 		
 		if($stmt = $this->_db->prepare($sql)) {
             $stmt->bindParam(":uid", $uid, PDO::PARAM_INT);            
@@ -87,6 +87,20 @@
 				array_push($templates, $row);				
 			}
 			return $templates;
+ 		}
+    }
+    
+     //Retrieves a list of template based on the template id
+    function get_template_by_id($id){
+		
+        $sql = "SELECT * FROM templates 
+			WHERE id =:id LIMIT 1"; 
+		
+		if($stmt = $this->_db->prepare($sql)) {
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);            
+            $stmt->execute();
+            $row = $stmt->fetch();
+	        return $row;
  		}
     }
     

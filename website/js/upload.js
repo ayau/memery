@@ -38,6 +38,8 @@
 		
 	main.imgAreaSelect({ x1:0, y1:0, x2: 100, y2: 100, aspectRatio: '1:1', handles: "corners", onSelectChange: preview });
 	append_image_size(main.attr('src'), main);
+	
+	$("#upload_save").show();
 	}   
 
 	if (window.FormData) {

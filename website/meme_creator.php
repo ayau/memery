@@ -21,7 +21,8 @@ if(empty($text))
 $font_file      = 'res/font/impact.ttf';
 $font_size      = 30 ; // font size in pts
 $font_color     = '#ffffff' ;
-$image_file     = 'res/meme_templates/'.$meme.'.png';
+$image_file 	= $meme;
+//$image_file     = 'res/meme_templates/'.$meme.'.png';
 
 
 // trust me for now...in PNG out PNG
@@ -41,7 +42,26 @@ if(!is_readable($font_file)) {
 
 // create and measure the text
 //Image itself
-$image =  imagecreatefrompng($image_file);
+$type = exif_imagetype($meme);
+	
+	//Need to check if it's gif, jpeg or png
+	
+	switch ($type)
+	  {
+	    case IMAGETYPE_GIF:
+	      $image = imagecreatefromgif( $meme );
+	      break;
+	
+	    case IMAGETYPE_JPEG:
+	      $image = imagecreatefromjpeg( $meme );
+	      break;
+	
+	    case IMAGETYPE_PNG:
+	      $image = imagecreatefrompng( $meme );
+	      break;
+	  }
+
+
 
 if(!$image)
 {

@@ -1,5 +1,6 @@
-Drop Table IF EXISTS users;
+Drop Table IF EXISTS memes;
 Drop Table IF EXISTS templates;
+Drop Table IF EXISTS users;
 
 CREATE TABLE users(
 id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -30,5 +31,18 @@ crop_x1 INT default 100,
 crop_y1 INT default 100,
 PRIMARY KEY(id),
 UNIQUE KEY(src),
+FOREIGN KEY(created_by) references users(id)
+);
+
+CREATE TABLE memes(
+id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+title varchar(64) NOT NULL default 'unnamed',
+template_id INT NOT NULL,
+created_by INT NOT NULL,
+created_at DATETIME NOT NULL,
+text_top varchar(128),
+text_bot varchar(128),
+PRIMARY KEY(id),
+FOREIGN KEY(template_id) references templates(id),
 FOREIGN KEY(created_by) references users(id)
 );

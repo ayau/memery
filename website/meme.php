@@ -2,6 +2,8 @@
 	include_once "common/base.php"; 
 	$pageTitle = "meme generator";
 	include_once "common/header.php";
+	include_once "inc/class.meme.inc.php";
+	$meme = new Meme();
 	include_once "inc/class.template.inc.php";
 	$template = new Template();
 ?>
@@ -10,21 +12,12 @@
 	
 <?php 
 	if(isset($_GET['id'])):
-		$t = $template -> get_template_by_id($_GET['id']);
-		if($t!=null):
-		echo "<div id='generator_panel'><img src='".$t['src']."' temp_id='".$t['id']."' source='".$t['src']."'alt=\"I don't always fail to display this meme. But when I do, I display this text instead.\"/></div>";
-?>	
-	<div id='generator_settings'>
-		<textarea id='toptext' type="text" row='4' placeholder='Top Text'>Tried to make the generator respond to input</textarea>
-		<textarea id='bottomtext' type="text" row='4' placeholder="Bottom Text">Success</textarea>
-		<center><div id='generator_preview' class='btn' type="button" >preview</div></center>
-		<input id='title' type='text' placeholder='Title'/>
-		<center><div id='generator_submit' class='btn' type="button" >submit</div></center>
-	</div>
-	
-<?php else:
-
-	echo "<center><h2>This meme does not exist.</h2></center>";
+		$m = $meme -> get_meme_by_id($_GET['id']);
+		if($m!=null):
+		$t = $template -> get_template_by_id($m['template_id']);
+		echo "<center><img src='meme_creator.php?meme=".$t['src']."&top_text=".$m['text_top']."&bottom_text=".$m['text_bot']."' meme_id='".$m['id']."' alt=\"I don't always fail to display this meme. But when I do, I display this text instead.\" /></center>";
+	else:
+		echo "<center><h2>This meme does not exist.</h2></center>";
 	endif;
 endif; ?>
 	

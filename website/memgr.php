@@ -15,7 +15,7 @@
 		<div class='small panel'><img src="res/meme_templates/tiny/socially-awkward-penguin-t.png" /></div>
 	</div>
 	
-	<div class='splash panel'><img src="meme_creator.php?meme=simply&top_text=one does not simply&bottom_text=add text to an image" alt="I don't always fail to display this meme. But when I do, I display this text instead." /></div>
+	<div class='splash panel'><img src="meme_creator.php?meme=res/meme_templates/simply.png&top_text=one does not simply&bottom_text=add text to an image" alt="I don't always fail to display this meme. But when I do, I display this text instead." /></div>
 	
 	<div class='small panel'><img src="res/meme_templates/tiny/scumbag-steve-t.png" /></div>
 	<div class='small panel'><img src="res/meme_templates/tiny/good-guy-greg-t.png" /></div>

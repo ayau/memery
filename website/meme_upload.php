@@ -28,7 +28,7 @@
 		<ul id="preview_list">
 
 		</ul>
-		<center><div id='upload_save' class='btn'>Save</div></center>
+		<center><div id='upload_save' class='btn' hidden>Save</div></center>
 	</div>
 
 	<link rel="stylesheet" href="plugins/jquery.imgareaselect-0.9.8/css/imgareaselect-animated.css" type="text/css" />
