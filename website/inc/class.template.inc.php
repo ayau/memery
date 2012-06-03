@@ -90,6 +90,25 @@
  		}
     }
     
+    //Retrieves the next 20 template uploaded by a user
+    function get_templates_for_preview($uid, $position=0){
+		
+        $sql = "SELECT * FROM templates 
+			WHERE created_by =:uid ORDER BY id DESC
+			LIMIT :pos, 20"; 
+		
+		if($stmt = $this->_db->prepare($sql)) {
+            $stmt->bindParam(":uid", $uid, PDO::PARAM_INT);
+            $stmt->bindParam(":pos", $position, PDO::PARAM_INT);           
+            $stmt->execute();
+            $templates = array(); 
+			while($row = $stmt->fetch()){
+				array_push($templates, $row);				
+			}
+			return $templates;
+ 		}
+    }
+    
      //Retrieves a list of template based on the template id
     function get_template_by_id($id){
 		

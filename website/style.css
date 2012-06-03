@@ -169,8 +169,7 @@ h2, td, p {font-family:gotham-medium;}
 
 /*User page*/
 
-.user_panel{min-height:200px; max-height:400px; background-color:#67A358; overflow:hidden;
-}
+.user_panel{min-height:200px; max-height:400px; background-color:#67A358; overflow:hidden;}
 .user_panel_item{background-color:#6DA95F; background-size: 100%; height:180px; width:180px;margin:10px 5px 10px 10px; position:relative; float:left; }
 
 .user_panel_img{height:180px; width:180px;}
@@ -178,6 +177,16 @@ h2, td, p {font-family:gotham-medium;}
 
 .darken_hover{height:100%; width:100%;}
 .darken_hover:hover{opacity:0.5; background-color:black;}
+
+.rightarrow{height:200px; width:80px; float:right; background-image: url(images/rightarrow.png)}
+.rightarrow:hover{background-image: url(images/rightarrow_hover.png); cursor:pointer;}
+
+.leftarrow{height:200px; width:50px; float:left; background-image: url(images/leftarrow.png)}
+.leftarrow:hover{background-image: url(images/leftarrow_hover.png); cursor:pointer;}
+
+.visible_panel{overflow:hidden; width:810px;float:left; height:200px}
+.slider {width:4500px; height:200px; position:relative}
+
 
 /*Generator*/
 

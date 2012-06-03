@@ -98,7 +98,26 @@
  		}
     }
     
-     //Retrieves a list of template based on the template id
+    //Retrieves the next 20 memes created by a user
+    function get_memes_for_preview($uid, $position=0){
+		
+        $sql = "SELECT * FROM memes 
+			WHERE created_by =:uid ORDER BY id DESC
+			LIMIT :pos, 20"; 
+		
+		if($stmt = $this->_db->prepare($sql)) {
+            $stmt->bindParam(":uid", $uid, PDO::PARAM_INT);
+            $stmt->bindParam(":pos", $position, PDO::PARAM_INT);           
+            $stmt->execute();
+            $templates = array(); 
+			while($row = $stmt->fetch()){
+				array_push($templates, $row);				
+			}
+			return $templates;
+ 		}
+    }
+    
+     //Retrieves a list of memes based on the meme id
     function get_meme_by_id($id){
 		
         $sql = "SELECT * FROM memes 

@@ -15,7 +15,8 @@
 		$m = $meme -> get_meme_by_id($_GET['id']);
 		if($m!=null):
 		$t = $template -> get_template_by_id($m['template_id']);
-		echo "<center><img src='meme_creator.php?meme=".$t['src']."&top_text=".$m['text_top']."&bottom_text=".$m['text_bot']."' meme_id='".$m['id']."' alt=\"I don't always fail to display this meme. But when I do, I display this text instead.\" /></center>";
+		echo "<center><h2>".$m['title']."</h2>";
+		echo "<img src='meme_creator.php?meme=".$t['src']."&top_text=".$m['text_top']."&bottom_text=".$m['text_bot']."' meme_id='".$m['id']."' alt=\"I don't always fail to display this meme. But when I do, I display this text instead.\" /></center>";
 	else:
 		echo "<center><h2>This meme does not exist.</h2></center>";
 	endif;
