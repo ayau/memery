@@ -1,10 +1,10 @@
 <?php
 	include_once "common/base.php";
 	$pageTitle = "sign up";
-	include_once "common/header.php";
 	include_once "inc/class.user.inc.php";
 	$db_memery = db_connect('memery');
 	$user = new User($db_memery);
+	include_once "common/header.php";
 ?>
 
 <div id="container">

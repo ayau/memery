@@ -1,9 +1,11 @@
 Drop Table IF EXISTS memes;
 Drop Table IF EXISTS templates;
+Drop Table IF EXSITS group_relations;
+Drop Table IF EXISTS groups;
 Drop Table IF EXISTS users;
 
 CREATE TABLE users(
-id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+id INT NOT NULL AUTO_INCREMENT,
 username varchar(64) NOT NULL default '',
 password char(64) binary NOT NULL default '',
 first_name varchar(64) NOT NULL default '',
@@ -19,8 +21,30 @@ UNIQUE KEY username (username),
 UNIQUE KEY nickname (nickname)
 );
 
+
+CREATE TABLE groups(
+id INT NOT NULL AUTO_INCREMENT,
+groupname varchar(64) NOT NULL default 'unnamed',
+description varchar(128),
+group_pic varchar(64),
+privacy TINYINT NOT NULL default 0,
+created_by INT NOT NULL,
+created_at DATETIME NOT NULL,
+PRIMARY KEY(id),
+FOREIGN KEY(created_by) references users(id)
+);
+
+CREATE TABLE group_relations(
+group_id INT NOT NULL ,
+user_id INT NOT NULL,
+created_at DATETIME NOT NULL,
+FOREIGN KEY(group_id) references groups(id),
+FOREIGN KEY(user_id) references users(id)
+);
+
+
 CREATE TABLE templates(
-id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+id INT NOT NULL AUTO_INCREMENT,
 name varchar(64) NOT NULL default 'unnamed',
 src varchar(64) NOT NULL,
 created_by INT NOT NULL,
@@ -35,7 +59,7 @@ FOREIGN KEY(created_by) references users(id)
 );
 
 CREATE TABLE memes(
-id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+id INT NOT NULL AUTO_INCREMENT,
 title varchar(64) NOT NULL default 'unnamed',
 template_id INT NOT NULL,
 created_by INT NOT NULL,

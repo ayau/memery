@@ -47,9 +47,11 @@
         //If the session is logged in, check if session is valid
 		if ($_SESSION['logged']) { 
 			$this->_checkSession(); 
-		} elseif ( isset($_COOKIE['mrywebLogin']) ) { 	//If not, try to log in with cookie
-			$this->_checkRemembered($_COOKIE['mrywebLogin']); 
 		}
+		//Doesn't work. It logs the user in after he logs out.
+		/* elseif ( isset($_COOKIE['mrywebLogin']) ) { 	//If not, try to log in with cookie
+			$this->_checkRemembered($_COOKIE['mrywebLogin']); 
+		}*/
     }
 	
 	/*If email is not in use, creates account then logs the user in.
@@ -201,7 +203,7 @@
             $stmt->bindParam(":cookie", $cookie, PDO::PARAM_STR);   
             $stmt->execute(); 
 			if($row = $stmt->fetch()){
-				$this->_setSession($result, true); 
+				$this->_setSession($row, true); 
 			}
 		} 
 	}

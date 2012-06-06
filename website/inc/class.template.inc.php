@@ -109,7 +109,7 @@
  		}
     }
     
-     //Retrieves a list of template based on the template id
+     //Retrieves a template based on the template id
     function get_template_by_id($id){
 		
         $sql = "SELECT * FROM templates 
