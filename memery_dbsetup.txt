@@ -1,3 +1,6 @@
+Drop Table IF EXSITS comments_vote;
+Drop Table IF EXSITS comments;
+Drop Table IF EXISTS memes_vote;
 Drop Table IF EXISTS memes;
 Drop Table IF EXISTS templates;
 Drop Table IF EXSITS group_relations;
@@ -39,7 +42,8 @@ group_id INT NOT NULL ,
 user_id INT NOT NULL,
 created_at DATETIME NOT NULL,
 FOREIGN KEY(group_id) references groups(id),
-FOREIGN KEY(user_id) references users(id)
+FOREIGN KEY(user_id) references users(id),
+UNIQUE KEY relations(group_id, user_id)
 );
 
 
@@ -70,3 +74,33 @@ PRIMARY KEY(id),
 FOREIGN KEY(template_id) references templates(id),
 FOREIGN KEY(created_by) references users(id)
 );
+
+CREATE TABLE memes_vote(
+meme_id INT NOT NULL,
+user_id INT NOT NULL,
+vote TINYINT NOT NULL,
+FOREIGN KEY(meme_id) references memes(id),
+FOREIGN KEY(user_id) references users(id),
+UNIQUE KEY relations(meme_id, user_id)
+);
+
+CREATE TABLE comments(
+id INT NOT NULL AUTO_INCREMENT,
+user_id INT NOT NULL,
+meme_id INT NOT NULL,
+created_at DATETIME NOT NULL,
+text varchar(128),
+PRIMARY KEY(id),
+FOREIGN KEY(meme_id) references memes(id),
+FOREIGN KEY(user_id) references users(id)
+);
+
+CREATE TABLE comments_vote(
+comment_id INT NOT NULL,
+user_id INT NOT NULL,
+vote TINYINT NOT NULL,
+FOREIGN KEY(comment_id) references comments(id),
+FOREIGN KEY(user_id) references users(id),
+UNIQUE KEY relations(comment_id, user_id)
+);
+

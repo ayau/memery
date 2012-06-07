@@ -61,7 +61,7 @@
 		       	"&description="+description+
 		       	"&privacy="+privacy,
 		       	success: function(r){
-		       		window.location = "/group.php?gid="+r;
+		       		window.location = "/group.php?id="+r;
 		   		},
 		     	error:function(){}  
   			});

@@ -16,7 +16,7 @@
 	
 <?php 	if(isset($_SESSION['uid'])&& $_SESSION['uid']!=0): ?>
 
-	<h1>Groups</h1><a href='create_group.php'><div class='btn' style='position:absolute; left:350px; top:250px;' type='button'>Create Group</div></a>
+	<div style='overflow:auto; clear:both;'><h1 style='float:left'>Groups</h1><a href='create_group.php'><div style='float:left; position:relative; top:20px; left:30px' class='btn' type='button'>Create Group</div></a></div>
 	<div class='user_panel rounded'>
 		<div class='leftarrow_large'></div>
 		<div class='visible_panel'>
