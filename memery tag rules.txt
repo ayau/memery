@@ -1,0 +1,60 @@
+Memery - tags rules:
+
+You can tag 0 or more groups when you upload templates or create memes.
+
+When you tag a group(or a person) when you upload a template, that template will be available to everyone in that group and will show up in the group's list of templates
+
+When you tag a group(or a person) when you upload a meme, that meme will show up on the group's and ther person's wall.
+
+Privacy for memes and templates:
+Public	(free for anyone to view)
+Group only (only available for people in group)
+Private  (only viewed with link)
+
+Privacy for groups:
+Public (anyone can join group, view its content and upload memes)
+Private (Only through invites (or accepted requests), only public content available to all, only members can upload memes)
+Secret (not searchable. Only through invites)
+
+
+Private template -> viewable with link. Other users can generate memes if they have the link. Shows up on user's wall (only for himself to view)
+
+Meme/template with no tags:
+
+Public meme -> viewable to all, automatically added to the trending memes (group: world, if you may)
+group only meme -> disallow. (not allow them to tag or select groups when uploading a private meme)
+
+Public templates -> viewable to all and searchable
+group only template ->disallow.
+
+Meme/template with a public group tag:
+Public meme -> Yes
+Group only meme -> disallow
+private meme -> disallow
+
+Meme/template with a private group tag:
+Public meme -> allow. Will show up when non group members are visiting
+Group only meme -> only memebers can view meme or use template
+
+
+Meme/template with a secret group tag:
+Public meme -> Meme shows up on secret group's wall, but is also added to "world", viewable to all.
+Group only meme -> Meme only shows up on secret group's wall.
+
+
+Multiple groups:
+Mix of public and private:
+	Public meme -> Public on both
+	Group only meme -> Warning "xxx group is public. Adding it to that group will make the meme viewable to all", but allow them to do so.
+
+Mix of public and secret:
+	Public meme -> okay
+	Group only meme -> Same warning as above
+
+Mix of private and secret:
+	public meme -> ok
+	Group only meme -> ok.
+
+Mix of public, private and secret:
+	public -> ok
+	Group only -> warning

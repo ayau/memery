@@ -21,13 +21,13 @@
                 
                 
                 <input type="radio" name="privacy" id="public" value="0" checked />
-                <label for="public">Public <p>(Everyone can upload contents to this group)</p></label>
+                <label for="public">Public <p class='hint'>(Everyone can upload contents to this group)</p></label>
   				<br />
   				<input type="radio" name="privacy" id="private" value="1" />
-  				<label for="private">Private <p>(Only group memebers can upload contents)</p></label>
+  				<label for="private">Private <p class='hint' >(Only group memebers can upload contents)</p></label>
   				<br />
   				<input type="radio" name="privacy" id="secret" value="2" />
-  				<label for="secret">Secret <p>(Only group memebers can view content)</p></label>
+  				<label for="secret">Secret <p class='hint'>(Only group memebers can view content)</p></label>
   				<br /><br />
                 
 	            
@@ -49,7 +49,7 @@
 <script>
 	$("#create_group_submit").live("click",function(){
 		
-			name = $("#groupname").val();
+			name = $("#group_name").val();
 			description = $("#group_description").val();
 			
 			privacy = $('#create_group input[type=radio]:checked').val();

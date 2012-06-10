@@ -1,7 +1,7 @@
 <?php
  
 /**
- * Handles user interactions within the app
+ * Handles user log ins within the app
  *
  * PHP version 5
  *

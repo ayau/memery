@@ -14,15 +14,21 @@
 <div id="container">
 	<br /><br />
 	
-<?php 	if(isset($_SESSION['uid'])&& $_SESSION['uid']!=0): ?>
+<?php 	if(isset($_SESSION['uid'])&& $_SESSION['uid']!=0): 
+			if(isset($_GET['uid']))
+				$cuser = $_GET['uid'];
+			else
+				$cuser = $_SESSION['uid']; ?>
+				
 
 	<div style='overflow:auto; clear:both;'><h1 style='float:left'>Groups</h1><a href='create_group.php'><div style='float:left; position:relative; top:20px; left:30px' class='btn' type='button'>Create Group</div></a></div>
 	<div class='user_panel rounded'>
 		<div class='leftarrow_large'></div>
 		<div class='visible_panel'>
 		<div id='groups_slider' class='slider' style='height:400px'>	
-	<?php $groups = $group -> get_groups_for_preview($_SESSION['uid']);
+	<?php $groups = $group -> get_groups_for_preview($cuser);
 	$max = ceil(count($groups)/8)*8;
+	if($max==0) $max = 8;	//Shows 8 blank groups
 	echo "<div class='group_eight'>";
 	for($i=0; $i<$max; $i++){
 		if($i%8 == 0 && $i != 0){
@@ -61,8 +67,9 @@
 	<div class='leftarrow'></div>
 	<div class='visible_panel'>
 		<div id='memes_slider' class='slider'>	
-<?php $memes = $meme -> get_memes_for_preview($_SESSION['uid']);
+<?php $memes = $meme -> get_memes_for_preview($cuser);
 	$max = ceil(count($memes)/4)*4;
+	if($max==0) $max = 4;
 	for($i=0; $i<$max; $i++){
 		if($i< count($memes)){
 			$m = $memes[$i];
@@ -92,8 +99,9 @@
 	<div class='leftarrow'></div>
 	<div class='visible_panel'>
 		<div id='uploads_slider' class='slider'>	
-<?php $templates = $template -> get_templates_for_preview($_SESSION['uid']);
+<?php $templates = $template -> get_templates_for_preview($cuser);
 	$max = ceil(count($templates)/4)*4;
+	if($max==0) $max = 4;
 	for($i=0; $i<$max; $i++){
 		if($i< count($templates)){
 			$t = $templates[$i];

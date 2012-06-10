@@ -95,8 +95,8 @@
           try
           {
           	$stmt = $this->_db->prepare($sql);
-            $stmt->bindParam(":uid", $group_id, PDO::PARAM_INT);
-            $stmt->bindParam(":gid", $user_id, PDO::PARAM_INT);
+            $stmt->bindParam(":gid", $group_id, PDO::PARAM_INT);
+            $stmt->bindParam(":uid", $user_id, PDO::PARAM_INT);
             $stmt->bindParam(":time", $datetime, PDO::PARAM_STR);
             $stmt->execute();
             $stmt->closeCursor();
@@ -178,6 +178,40 @@
  		}
     }
     
+    //returns true if the user is in a group
+    function get_following($id){
+    	$uid = $_SESSION['uid'];
+    	
+    	 $sql = "SELECT * FROM group_relations
+			WHERE group_id =:id AND user_id=:uid LIMIT 1"; 
+		
+		if($stmt = $this->_db->prepare($sql)) {
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT); 
+            $stmt->bindParam(":uid", $uid, PDO::PARAM_INT);            
+            $stmt->execute();
+			if($row = $stmt->fetch())
+				return true;
+			else
+				return false;
+ 		}
+    }
+    
+    //Retrieve all groups
+    function get_groups($id){
+    	 $sql = "SELECT group_id FROM group_relations
+			WHERE user_id =:uid"; 
+		
+		if($stmt = $this->_db->prepare($sql)) {
+            $stmt->bindParam(":uid", $id, PDO::PARAM_INT);            
+            $stmt->execute();
+            $groups = array();
+            while ($row = $stmt->fetch()){
+            	$group = $this->get_group_by_id($row['group_id']);
+            	array_push($groups, $group);	
+            }
+            return $groups;
+ 		}
+    }
    
     
     

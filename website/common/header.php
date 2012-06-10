@@ -36,6 +36,11 @@ if (!isset($_SESSION['uid']) ) {
 <?php else: ?>
 			<p>Logged in as: <a href="/user.php?uid=<?php echo $_SESSION['uid']?>"><?php echo $_SESSION['username'];?></a></p>
 			<a href="/logout.php"><div class='header_button btn'>Log out</div></a>
+			<br /><br />
+			<div style='position:relative; top:50px;'>
+				<input type="text" name="search" id="search" class='inputfields' placeholder='Search'/>
+				<img src='images/search.png' class='search'/>
+			</div>
 <?php endif;?>
 		</div>
 		
@@ -49,3 +54,24 @@ if (!isset($_SESSION['uid']) ) {
 				<a href='/help.php'><div class='nav_button'>help</div></a>
 			</div>
 		</div>
+		
+<script>
+	//if enter is pressed
+    $('#search').keypress(function(e){
+    	if (e.which == 13)
+    		searchenter();
+	});
+	
+	//or search button is pressed
+	$(".search").live("click",function(){
+		searchenter();
+	});
+	
+    	function searchenter(){
+    		if($("#search").val().replace(/\s/g,"").length>0){	//check if search is empty
+    			item = $("#search").val().replace(/^(\s+)|(\s+)$/g,"");	//removing space from beginning and end
+    			item = item.replace(/(\s+)/g," ");	//replacing consecutive spaces with one space
+    			window.location = "search.php?search="+encodeURIComponent(item)
+  		 }
+    	};
+</script>
