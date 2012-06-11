@@ -266,6 +266,9 @@ textarea{display:block; width:300px; height:100px;
  	background: rgba(173, 12, 12, 0.9);
 }
 
+#generator_settings label{font-size:16px; font-family:gotham-medium}
+#generator_settings label p{font-size:16px;}
+
 /*CREATE GROUP*/
 
 #create_group label{font-size:18px; font-family:gotham-medium}

@@ -19,7 +19,7 @@
 				+"<div style='margin-top:15px;'>"
 					+"<p style='display:inline'>Privacy:  </p>"
 					+"<select style='height:30px; font-size:16px'>"
-  						+"<option value='public;>Public</option>"
+  						+"<option value='public'>Public</option>"
   						+"<option value='private'>Private</option>"
   						+"<option value='grouponly'>Group only</option>"
 					+"</select>"

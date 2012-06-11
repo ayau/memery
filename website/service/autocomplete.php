@@ -1,4 +1,7 @@
 <?php
+	//Real time search for tags. Returns all friends and groups with match. Not currently used.
+	
+	
     include_once "../inc/constants.inc.php";
 	include_once "../inc/class.search.inc.php";
 	$search = new Search();
