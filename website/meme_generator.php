@@ -199,14 +199,56 @@ endif; ?>
 			       	data: "action=insert_meme&title="+title+
 			       	"&temp_id="+temp_id+
 			       	"&text_top="+text_top+
-			       	"&text_bottom="+text_bottom,
-			       	success: function(){
-			       		window.location = "/user.php";
+			       	"&text_bottom="+text_bottom+
+			       	"&privacy="+$("input[type='radio']:checked").attr("value"),
+			       	success: function(r){
+			       		submit_group_tags(r);
 			   		},
 			     	error:function(){}  
 	  			});
   			}
 		})
+		
+		//submit group tags to database. Called when submit button is pressed.
+		function submit_group_tags(meme_id){
+			group_ids = [];
+			//collecting all group ids
+			for(i = 0; i < group_tags.length; i++){
+				group_ids.push(group_tags[i][0]);
+			}
+			
+			$.ajax({
+		    	type: "POST",
+		       	url: "db-interaction/memes.php",
+		       	data: "action=insert_group_tags&meme_id="+meme_id+
+			    "&groups[]="+group_ids,
+			    success: function(){
+			    	submit_keyword_tags(meme_id);
+		       		//window.location = "/user.php";
+		   		},
+		     	error:function(){}  
+			});
+		}
+		
+		//submit keyword tags to database. Called after group tags are submitted.
+		function submit_keyword_tags(meme_id){
+			keywords = [];
+			//collecting all group ids
+			for(i = 0; i < keyword_tags.length; i++){
+				keywords.push(keyword_tags[i][0]);		//should sanitize inputs first
+			}
+			
+			$.ajax({
+		    	type: "POST",
+		       	url: "db-interaction/memes.php",
+		       	data: "action=insert_keyword_tags&meme_id="+meme_id+
+			    "&keywords[]="+keywords,
+			    success: function(){
+		       		window.location = "/user.php";
+		   		},
+		     	error:function(){}  
+			});
+		}
 		
 		//Checks the meme privacy matches the group privacy
 		function check_privacy(){

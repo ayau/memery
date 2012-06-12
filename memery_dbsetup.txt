@@ -1,3 +1,5 @@
+Drop Table IF EXISTS keyword_tags;
+Drop Table IF EXISTS group_tags;
 Drop Table IF EXSITS comments_vote;
 Drop Table IF EXSITS comments;
 Drop Table IF EXISTS memes_vote;
@@ -70,6 +72,7 @@ created_by INT NOT NULL,
 created_at DATETIME NOT NULL,
 text_top varchar(128),
 text_bot varchar(128),
+privacy TINYINT NOT NULL default 0,
 PRIMARY KEY(id),
 FOREIGN KEY(template_id) references templates(id),
 FOREIGN KEY(created_by) references users(id)
@@ -104,3 +107,15 @@ FOREIGN KEY(user_id) references users(id),
 UNIQUE KEY relations(comment_id, user_id)
 );
 
+CREATE TABLE group_tags(
+meme_id INT NOT NULL,
+group_id INT NOT NULL,
+FOREIGN KEY(meme_id) references memes(id),
+FOREIGN KEY(group_id) references groups(id)
+);
+
+CREATE TABLE keyword_tags(
+meme_id INT NOT NULL,
+keyword varchar(32) NOT NULL,
+FOREIGN KEY(meme_id) references memes(id)
+);

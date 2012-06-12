@@ -53,10 +53,11 @@
 		$text_top = $_POST['text_top'];
 		$text_bottom = $_POST['text_bottom'];
 		$created_by = $_SESSION['uid'];
+		$privacy = $_POST['privacy'];
 		
 		//Insert user into database
-        $sql = "INSERT INTO memes(title, template_id, created_by, created_at, text_top, text_bot)
-        		VALUES(:title, :temp_id, :uid, :time, :ttop, :tbot)";
+        $sql = "INSERT INTO memes(title, template_id, created_by, created_at, text_top, text_bot, privacy)
+        		VALUES(:title, :temp_id, :uid, :time, :ttop, :tbot, :privacy)";
           try
           {
           	$stmt = $this->_db->prepare($sql);
@@ -66,6 +67,7 @@
             $stmt->bindParam(":time", $datetime, PDO::PARAM_STR);
             $stmt->bindParam(":ttop", $text_top, PDO::PARAM_STR);
             $stmt->bindParam(":tbot", $text_bottom, PDO::PARAM_STR);
+            $stmt->bindParam(":privacy", $privacy, PDO::PARAM_INT);
             $stmt->execute();
             $stmt->closeCursor();
             
@@ -131,7 +133,63 @@
  		}
     }
     
+    //insert group_id, meme_id pairs into database
+   function insert_group_tags(){
+   		$meme_id = $_POST['meme_id'];
+   		$groups = $_POST['groups'];
+   		
+   		$groups = explode(",", $groups[0]);
+   		
+   		for($i = 0; $i<count($groups); $i++){
+   			$group_id =  $groups[$i];
+   			
+   			//Insert each pair into the database
+	        $sql = "INSERT INTO group_tags(meme_id, group_id)
+	        		VALUES(:meme_id, :group_id)";
+	          try
+	          {
+	          	$stmt = $this->_db->prepare($sql);
+	            $stmt->bindParam(":meme_id", $meme_id, PDO::PARAM_INT);
+	            $stmt->bindParam(":group_id", $group_id, PDO::PARAM_INT);
+	            $stmt->execute();
+	            $stmt->closeCursor();
+	            
+	        }
+	        catch(PDOException $e)
+			{
+				return $e->getMessage();
+			}
+   		}
+   }
    
+    //insert keyword, meme_id pairs into database
+   function insert_keyword_tags(){
+   		$meme_id = $_POST['meme_id'];
+   		$keywords = $_POST['keywords'];
+   		
+   		$keywords = explode(",", $keywords[0]);
+   		
+   		for($i = 0; $i<count($keywords); $i++){
+   			$keyword =  $keywords[$i];
+   			
+   			//Insert each pair into the database
+	        $sql = "INSERT INTO keyword_tags(meme_id, keyword)
+	        		VALUES(:meme_id, :keyword)";
+	          try
+	          {
+	          	$stmt = $this->_db->prepare($sql);
+	            $stmt->bindParam(":meme_id", $meme_id, PDO::PARAM_INT);
+	            $stmt->bindParam(":keyword", $keyword, PDO::PARAM_STR);
+	            $stmt->execute();
+	            $stmt->closeCursor();
+	            
+	        }
+	        catch(PDOException $e)
+			{
+				return $e->getMessage();
+			}
+   		}
+   }
     
     
 }
