@@ -44,7 +44,7 @@
 			
 			$name = $g['groupname'];
 			
-			echo "<a href='/group.php?id=".$g['id']."'>";
+			echo "<a href='/group.php?gid=".$g['id']."'>";
 			echo "<div class='user_panel_item rounded' style='background-image: url(".$crop.")'>";
 			echo "<div class='darken_hover rounded'>";
 				echo "<img class='user_panel_img' title=\"".$name."\" style='opacity:0' src='".$crop."'/>";

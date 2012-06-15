@@ -5,8 +5,8 @@
 	include_once "inc/class.group.inc.php";
 	$group = new Group();
 	
-	if(isset($_GET['id'])):
-		$g = $group->get_group_by_id($_GET['id']);	
+	if(isset($_GET['gid'])):
+		$g = $group->get_group_by_id($_GET['gid']);	
 ?>
 
 <div id="container">
