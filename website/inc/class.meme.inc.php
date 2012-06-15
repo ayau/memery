@@ -100,7 +100,8 @@
  		}
     }
     
-    //Retrieves the next 20 memes created by a user
+    //Retrieves the next 20 memes created by a user.
+    //Used on user.php
     function get_memes_for_preview($uid, $position=0){
 		
         $sql = "SELECT * FROM memes 
@@ -134,6 +135,7 @@
     }
     
     //insert group_id, meme_id pairs into database
+    //Used on meme gen
    function insert_group_tags(){
    		$meme_id = $_POST['meme_id'];
    		$groups = $_POST['groups'];
@@ -162,7 +164,8 @@
    		}
    }
    
-    //insert keyword, meme_id pairs into database
+    //insert keyword, meme_id pairs into database.
+    //Used on meme gen
    function insert_keyword_tags(){
    		$meme_id = $_POST['meme_id'];
    		$keywords = $_POST['keywords'];
@@ -192,6 +195,7 @@
    }
    
    //Given a meme_id, returns all group ids
+   //Used on index.
    function get_group_tags($id){
    		$sql = "SELECT group_id FROM group_tags 
 			WHERE meme_id =:id"; 
@@ -208,6 +212,7 @@
    }
    
       //Given a meme_id, returns all keywords
+      //Used on index.
    function get_keyword_tags($id){
    		$sql = "SELECT keyword FROM keyword_tags 
 			WHERE meme_id =:id"; 
@@ -222,6 +227,26 @@
 	        return $keywords;
  		}
    }
+   
+   //Retrieves the next 9 memes for preview on memgr. Order by date, desc.
+   //Used on index.
+    function get_preview_for_uploads($uid, $mid){
+		
+        $sql = "SELECT * FROM memes 
+			WHERE created_by =:uid AND id <:mid ORDER BY id DESC
+			LIMIT 9"; 
+		
+		if($stmt = $this->_db->prepare($sql)) {
+            $stmt->bindParam(":uid", $uid, PDO::PARAM_INT);
+            $stmt->bindParam(":mid", $mid, PDO::PARAM_INT);           
+            $stmt->execute();
+            $memes = array(); 
+			while($row = $stmt->fetch()){
+				array_push($memes, $row);				
+			}
+			return $memes;
+ 		}
+    }
     
     
 }

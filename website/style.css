@@ -63,9 +63,9 @@ h2, td, p {font-family:gotham-medium;}
 
 
 /*Index*/
-.splash {width:550px; margin: 0 10px;}
-.small {width:100px; height:100px;}
-.panel{position:relative; padding:3px; float:left; display:block; overflow:hidden;}
+.splash {width:550px; margin: 0 15px 0px 10px;}
+.small {width:100px; height:100px; background-size: 100%; overflow:hidden; margin:3px;}
+.panel{position:relative; float:left; display:block; overflow:hidden; background-color:#6DA95F;}
 .small img{width:100px; height:auto}
 .splash img{width:550px; height:auto;}
 

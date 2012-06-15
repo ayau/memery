@@ -76,7 +76,10 @@
 			$t = $template -> get_template_by_id($m['template_id']);
 			$crop = 'image_crop.php?src='.$t['src'].'&x0='.$t['crop_x0'].'&y0='.$t['crop_y0'].'&x1='.$t['crop_x1'].'&y1='.$t['crop_y1'];
 			
-			$texts = $m['text_top']."\n".$m['text_bot'];
+			if(strlen(trim($m['title']))>0)
+				$texts = $m['title'];
+			else
+				$texts = $m['text_top']."\n".$m['text_bot'];
 			
 			echo "<a href='/index.php?mode=u&uid=".$_GET['uid']."&mid=".$m['id']."'>";
 			echo "<div class='user_panel_item rounded' style='background-image: url(".$crop.")'>";

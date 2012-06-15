@@ -18,7 +18,7 @@
 			$t = $template -> get_template_by_id($m['template_id']);
 ?>
 	<div id='memgr_container'>
-		<?php echo "<h2 style='margin:20px 20px 20px 15px'>".$m['title']."<p class='hint' style='display:inline; font-size:20px;'><a href='group.php?gid=".'1'."'>(trolling in the deep)</p></a></h2>";?>
+		<?php echo "<h2 style='margin:20px'>".$m['title']."</h2>";?>
 	
 	<div class='splash panel'>
 		
@@ -40,16 +40,38 @@
 
 ?>	
 	</div>
-	
-	<div class='small panel'><img src="res/meme_templates/tiny/scumbag-steve-t.png" /></div>
-	<div class='small panel'><img src="res/meme_templates/tiny/good-guy-greg-t.png" /></div>
-	<div class='small panel'><img src="res/meme_templates/tiny/the-most-interesting-man-in-the-world-t.png" /></div>
-	<div class='small panel'><img src="res/meme_templates/tiny/socially-awkward-penguin-t.png" /></div>
-	<div class='small panel'><img src="res/meme_templates/tiny/scumbag-steve-t.png" /></div>
-	<div class='small panel'><img src="res/meme_templates/tiny/futurama-fry-t.png" /></div>
-	<div class='small panel'><img src="res/meme_templates/tiny/good-guy-greg-t.png" /></div>
-	<div class='small panel'><img src="res/meme_templates/tiny/the-most-interesting-man-in-the-world-t.png" /></div>
-	<div class='small panel'><img src="res/meme_templates/tiny/socially-awkward-penguin-t.png" /></div>
+
+<!-- Displaying preview panels-->
+<?php
+	if(isset($_GET['mode'])):
+		 if($_GET['mode']==='u' && isset($_GET['uid'])):
+		 	$previews = $meme->get_preview_for_uploads($_GET['uid'], $_GET['mid']);
+		 	for($i = 0; $i < 9; $i ++){
+		 		if($i<count($previews)){
+		 			$m = $previews[$i];
+		 			$t = $template -> get_template_by_id($m['template_id']);
+		 			$crop = 'image_crop.php?src='.$t['src'].'&x0='.$t['crop_x0'].'&y0='.$t['crop_y0'].'&x1='.$t['crop_x1'].'&y1='.$t['crop_y1'];
+					if(strlen(trim($m['title']))>0)
+						$texts = $m['title'];
+					else
+						$texts = $m['text_top']."\n".$m['text_bot'];
+					
+						
+					echo "<a href='/index.php?mode=u&uid=".$_GET['uid']."&mid=".$m['id']."'>";
+					echo "<div class='small panel rounded' style='background-image: url(".$crop.")'>";
+					echo "<div class='darken_hover rounded'>";
+					echo "<img title=\"".$texts."\" style='opacity:0' src='".$t['src']."'/>";
+					echo "</div></div></a>";
+					
+		 		}else{
+		 			echo "<div class='small panel rounded'><div class='darken_hover rounded'></div></div>";
+		 		}
+		 	}
+	endif;
+	endif;
+
+
+?>
 	
 	<div id='rating_cloud'>		
 		<table>
