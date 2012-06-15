@@ -6,6 +6,8 @@
 	$meme = new Meme();
 	include_once "inc/class.template.inc.php";
 	$template = new Template();
+	include_once "inc/class.group.inc.php";
+	$group = new Group();
 ?>
 <div id="container">
 			<br /><br /><br />
@@ -16,12 +18,27 @@
 			$t = $template -> get_template_by_id($m['template_id']);
 ?>
 	<div id='memgr_container'>
-		<?php echo "<h2 style='margin-left:15px'>".$m['title']."<p class='hint' style='margin-left:20px; display:inline; font-size:20px;'><a href='group.php?gid=".'1'."'>(trolling in the deep)</p></a></h2>";?>
+		<?php echo "<h2 style='margin:20px 20px 20px 15px'>".$m['title']."<p class='hint' style='display:inline; font-size:20px;'><a href='group.php?gid=".'1'."'>(trolling in the deep)</p></a></h2>";?>
 	
 	<div class='splash panel'>
 		
-		<?php echo "<img src='meme_creator.php?meme=".$t['src']."&top_text=".$m['text_top']."&bottom_text=".$m['text_bot']."' meme_id='".$m['id']."' alt=\"I don't always fail to display this meme. But when I do, I display this text instead.\" />";?>
-		
+<?php
+ 	echo "<img src='meme_creator.php?meme=".$t['src']."&top_text=".$m['text_top']."&bottom_text=".$m['text_bot']."' meme_id='".$m['id']."' alt=\"I don't always fail to display this meme. But when I do, I display this text instead.\" />";
+
+	$groups = $meme->get_group_tags($_GET['mid']);
+	for($i = 0; $i < count($groups); $i++){
+		$g = $group -> get_group_by_id($groups[$i]);
+		if(strlen(trim($g['groupname']))>0)
+			echo "<div type='group' class='tags no_hover'>".$g['groupname']."</div>";
+	}
+	
+	$keywords = $meme->get_keyword_tags($_GET['mid']);
+	for($i = 0; $i < count($keywords); $i++){
+		if(strlen(trim($keywords[$i])) > 0)
+		echo "<div type='keyword' class='tags no_hover'>#".$keywords[$i]."</div>";
+	}
+
+?>	
 	</div>
 	
 	<div class='small panel'><img src="res/meme_templates/tiny/scumbag-steve-t.png" /></div>
@@ -49,7 +66,8 @@
 		<img style='margin-left:30px;' src='images/share_fb.png' width='40px'/>
 		<img src='images/share_tw.png' width='40px'/>
 	</div>
-	</div>
+
+	</div>	<!--End of Top display panel-->
 	
 	<div id='comments_container'>
 		<h2>Comments and whatnot</h2>

@@ -106,7 +106,7 @@ endif; ?>
 			if(!included){
 				if($("#group_tags li").length==0)
 					$("#group_tags").append("<li><h3>Groups</h3></li>");
-				$("#group_tags").append("<li type='"+data[1]+"' class='tags' tag_id='"+data[0]+"'>"+value +"</li>");				
+				$("#group_tags").append("<li type='"+data[1]+"' class='tags hover_remove' tag_id='"+data[0]+"'>"+value +"</li>");				
 				tag = [];
 				tag[0] = data[0];	//id
 				tag[1] = data[1];	//type, group or keyword
@@ -128,7 +128,7 @@ endif; ?>
 			if(!included){
 				if($("#keyword_tags li").length==0)
 						$("#keyword_tags").append("<li><h3>Tags</h3></li>");
-					$("#keyword_tags").append("<li type='"+data[1]+"' class='tags' tag_id='"+data[0]+"'>"+"#"+value +"</li>");			
+					$("#keyword_tags").append("<li type='"+data[1]+"' class='tags hover_remove' tag_id='"+data[0]+"'>"+"#"+value +"</li>");			
 				tag = [];
 				tag[0] = data[0];	//value of keyword
 				tag[1] = data[1];	//type, group or keyword

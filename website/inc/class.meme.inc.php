@@ -190,6 +190,38 @@
 			}
    		}
    }
+   
+   //Given a meme_id, returns all group ids
+   function get_group_tags($id){
+   		$sql = "SELECT group_id FROM group_tags 
+			WHERE meme_id =:id"; 
+		
+		if($stmt = $this->_db->prepare($sql)) {
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);            
+            $stmt->execute();
+            $groups = array();
+            while($row = $stmt->fetch()){
+            	array_push($groups, $row['group_id']);
+            }
+	        return $groups;
+ 		}
+   }
+   
+      //Given a meme_id, returns all keywords
+   function get_keyword_tags($id){
+   		$sql = "SELECT keyword FROM keyword_tags 
+			WHERE meme_id =:id"; 
+		
+		if($stmt = $this->_db->prepare($sql)) {
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);            
+            $stmt->execute();
+            $keywords = array();
+            while($row = $stmt->fetch()){
+            	array_push($keywords, $row['keyword']);
+            }
+	        return $keywords;
+ 		}
+   }
     
     
 }
