@@ -20,6 +20,7 @@ if (!isset($_SESSION['uid']) ) {
 
 <head>
 	<title><?php echo $pageTitle ?></title>
+	<link rel="shortcut icon"  href="images/favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="/style.css" type="text/css" />
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 </head>
