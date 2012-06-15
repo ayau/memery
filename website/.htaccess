@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^memery\.cloudcontrolled\.com$ [NC]
+RewriteRule (.*) http://www.meme-ry.com/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^meme-ry\.com$ [NC]
+RewriteRule (.*) http://www.meme-ry.com/$1 [R=301,L]
