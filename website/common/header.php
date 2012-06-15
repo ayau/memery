@@ -37,17 +37,15 @@ if (!isset($_SESSION['uid']) ) {
 			<p>Logged in as: <a href="/user.php?uid=<?php echo $_SESSION['uid']?>"><?php echo $_SESSION['username'];?></a></p>
 			<a href="/logout.php"><div class='header_button btn'>Log out</div></a>
 			<br /><br />
-			<div style='position:relative; top:50px;'>
-				<input type="text" name="search" id="search" class='inputfields' placeholder='Search'/>
-				<img src='images/search.png' class='search'/>
-			</div>
 <?php endif;?>
 		</div>
 		
 			
 			<div id='top_nav'>		<!--Should be part of the header -->
-				<a href="/memgr.php"><div class='nav_button'>memgr</div></a>
-				<a href="/meme_gallery.php"><div class='nav_button'>meme gallery</div></a>
+				<div style='position:relative;'>
+					<input type="text" name="search" id="search" class='inputfields' placeholder='Search'/>
+					<img src='images/search.png' class='search'/>
+				</div>
 				<a href="/meme_generator.php"><div class='nav_button'>meme generator</div></a>
 				<a href="/stateofbase.php"><div class='nav_button'>stats</div></a>
 				<a href="/meme_upload.php"><div class='nav_button'>upload</div></a>

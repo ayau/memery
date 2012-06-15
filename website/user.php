@@ -78,7 +78,7 @@
 			
 			$texts = $m['text_top']."\n".$m['text_bot'];
 			
-			echo "<a href='/meme.php?id=".$m['id']."'>";
+			echo "<a href='/index.php?mode=u&uid=".$_GET['uid']."&mid=".$m['id']."'>";
 			echo "<div class='user_panel_item rounded' style='background-image: url(".$crop.")'>";
 			echo "<div class='darken_hover rounded'>";
 				echo "<img class='user_panel_img' title=\"".$texts."\" style='opacity:0' src='".$t['src']."'/>";

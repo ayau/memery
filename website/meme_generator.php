@@ -202,7 +202,11 @@ endif; ?>
 			       	"&text_bottom="+text_bottom+
 			       	"&privacy="+$("input[type='radio']:checked").attr("value"),
 			       	success: function(r){
-			       		submit_group_tags(r);
+			       		meme_privacy = $("input[type='radio']:checked").attr("value");
+			    		if(meme_privacy == 2)		//don't add tags if meme is secret.
+			    			window.location = "/user.php";
+			    		else
+			       			submit_group_tags(r);
 			   		},
 			     	error:function(){}  
 	  			});

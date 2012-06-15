@@ -92,7 +92,7 @@ a:hover{text-decoration:underline; }
 	font-size:16px;
 }
 
-#top_nav{position:relative; top:-20px; width:850px; margin:0 auto}
+#top_nav{position:relative; top:-15px; width:850px; margin:0 auto}
 #top_nav div{float:left; margin:5px}
 
 .nav_button {
@@ -116,7 +116,7 @@ a:hover{text-decoration:underline; }
  	cursor:pointer;
 }
 
-#search {position:absolute}
+#search {float:left}
 .search {position:absolute; left:285px;top:8px; cursor:pointer; height:25px; width:25px}
 
 /*SIGN UP */
