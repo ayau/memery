@@ -1,0 +1,40 @@
+memery meeting. 
+
+Discuss tag rules. Tagging public stuff? and tagging users? Tagging groups you're not in?
+Friends?
+Taggin satisfactory?
+Title right now is optional?
+
+Remove standalone meme page but use memgr instead?
+
+Next step: simple gallery (filter by recent only) and meme page? (with tags and groups). Link groups with memes? and set up permission?
+
+Comments and upvotes
+
+Algorithm for hotness. (use the one from reddit with modifications?)
+
+What belongs in the group page?
+
+Designing News layout. (words, formats..etc) News algorithm.
+
+Memgr layout, implement back and forth. Comment and upvotes on memegr (if we remove meme.php we just need one place)
+
+Add to favorites? (no)
+
+More options to filter in gallery (by hashtags, date, posted by..etc)
+
+Implement news for users.
+
+Implement news for groups.
+
+Account security and SSL.
+
+refine meme generator font size and margins.
+
+refine meme generator page (to include recent uploads)
+
+filter responses on backend for file uploads
+
+Inviting users to groups
+
+Requesting invites from groups
