@@ -4,7 +4,7 @@
 	include_once "inc/class.user.inc.php";
 	$db_memery = db_connect('memery');
 	$user = new User($db_memery);
-	include_once "common/header.php";
+	include_once "common/header.php";		//Header is after User(db). If there's error, page will be blank. Check other pages as well.
 ?>
 
 <div id="container">

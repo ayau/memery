@@ -36,8 +36,13 @@
         }
         else
         {
-        	$dsn = "mysql:host=".DB_HOST.";dbname=".DB_MEMERY.";port=".DB_PORT;
-        	$this->_db = new PDO($dsn, DB_USER, DB_PASS);
+        	try{
+        		$dsn = "mysql:host=".DB_HOST.";dbname=".DB_MEMERY.";port=".DB_PORT;
+        		$this->_db = new PDO($dsn, DB_USER, DB_PASS);
+        	}catch (PDOException $e){
+            	echo '<br /><br /><center><h3>Connection failed</h3></center>';
+            	exit();
+            }
         }
         
         //Set current datetime

@@ -16,8 +16,8 @@ if (!isset($_SESSION['uid']) ) {
 }
 ?>
 
-<meta name='KEYWORDS' content='memery,meme,memes,photo,caption,viral,generator,upload,share'>
-<meta name='Description' content="Upload, create and share custom memes within your communities. Never lose track of a meme again.">
+<meta name='KEYWORDS' content='memery,meme,memes,photo,caption,viral,generator,upload,share'/>
+<meta name='Description' content="Upload, create and share custom memes within your communities. Never lose track of a meme again."/>
 
 
 <head>
