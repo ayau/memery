@@ -67,7 +67,7 @@
 	<div class='leftarrow'></div>
 	<div class='visible_panel'>
 		<div id='memes_slider' class='slider'>	
-<?php $memes = $meme -> get_memes_for_preview($cuser);
+<?php $memes = $meme -> get_memes_created($cuser, 20);
 	$max = ceil(count($memes)/4)*4;
 	if($max==0) $max = 4;
 	for($i=0; $i<$max; $i++){

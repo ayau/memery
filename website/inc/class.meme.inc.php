@@ -105,26 +105,6 @@
  		}
     }
     
-    //Retrieves the next 20 memes created by a user.
-    //Used on user.php
-    function get_memes_for_preview($uid, $position=0){
-		
-        $sql = "SELECT * FROM memes 
-			WHERE created_by =:uid ORDER BY id DESC
-			LIMIT :pos, 20"; 
-		
-		if($stmt = $this->_db->prepare($sql)) {
-            $stmt->bindParam(":uid", $uid, PDO::PARAM_INT);
-            $stmt->bindParam(":pos", $position, PDO::PARAM_INT);           
-            $stmt->execute();
-            $templates = array(); 
-			while($row = $stmt->fetch()){
-				array_push($templates, $row);				
-			}
-			return $templates;
- 		}
-    }
-    
      //Retrieves a list of memes based on the meme id
     function get_meme_by_id($id){
 		
@@ -233,17 +213,46 @@
  		}
    }
    
-   //Retrieves the next 9 memes for preview on memgr. Order by date, desc.
-   //Used on index.
-    function get_preview_for_uploads($uid, $mid){
+   //Retrieves x memes created. Order by date, desc. Gets all meme_id less than $mid
+   //Used on index and user.php
+    function get_memes_created($uid, $limit, $mid=null){
 		
+    	if ($mid==null)
+    		$cutoff = "";
+    	else
+    		$cutoff = "AND id<".$mid;
+    	
         $sql = "SELECT * FROM memes 
-			WHERE created_by =:uid AND id <:mid ORDER BY id DESC
-			LIMIT 9"; 
+			WHERE created_by =:uid ".$cutoff." ORDER BY id DESC
+			LIMIT :lim"; 
 		
 		if($stmt = $this->_db->prepare($sql)) {
             $stmt->bindParam(":uid", $uid, PDO::PARAM_INT);
-            $stmt->bindParam(":mid", $mid, PDO::PARAM_INT);           
+            $stmt->bindParam(":lim", $limit, PDO::PARAM_INT);         
+            $stmt->execute();
+            $memes = array(); 
+			while($row = $stmt->fetch()){
+				array_push($memes, $row);				
+			}
+			return $memes;
+ 		}
+    }
+    
+   //Retrieves x popular memes. Order by popularity, desc. Gets all meme_id less than $mid
+   //Used on index and user.php
+    function get_memes_popular($limit, $pop=null){
+		
+    	if ($pop==null)
+    		$cutoff = "";
+    	else
+    		$cutoff = "WHERE pop<".$pop;		//personalized?
+    	
+        $sql = "SELECT *, created_at AS pop FROM memes 
+			".$cutoff." ORDER BY pop DESC
+			LIMIT :lim"; 
+		
+		if($stmt = $this->_db->prepare($sql)) {
+            $stmt->bindParam(":lim", $limit, PDO::PARAM_INT);         
             $stmt->execute();
             $memes = array(); 
 			while($row = $stmt->fetch()){
