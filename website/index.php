@@ -71,10 +71,12 @@
 	<div id='memgr_container'>
 		<?php echo "<h2 style='margin:20px; width:450px; float:left'>".$m['title']."</h2>";?>
 		
-		<div id='navigation'>
+		<div id='navigation'>			
+			<a href='meme_gallery.php'><div id='browse_all' class='btn'>Browse All</div></a>
 			<div id='right_arrow'><img src='images/right_arrow.png'/></div>
 			<div id='left_arrow'><img src='images/left_arrow.png'/></div>
 		</div>
+		
 	<div class='splash panel'>
 		
 <?php
