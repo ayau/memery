@@ -8,78 +8,132 @@
 	$template = new Template();
 	include_once "inc/class.group.inc.php";
 	$group = new Group();
-	include_once "inc/class.comment.inc.php";
-	$comment = new Comment();
+	include_once "inc/class.userinfo.inc.php";
+	$userinfo = new Userinfo();
 ?>
 <div id="container">
 			<br /><br /><br />
 <?php
-	if(isset($_GET['mid'])):
-	$m = $meme -> get_meme_by_id($_GET['mid']);
-		if($m!=null):
-			$t = $template -> get_template_by_id($m['template_id']);
+
+	//Get user id
+	if(isset($_GET['uid']))
+		$uid = $_GET['uid'];
+	else
+		$uid = $_SESSION['uid'];
+
+
+	//Get mode. u = upload, p = public	
+	if(isset($_GET['mode']))
+		$mode = $_GET['mode'];
+	else
+		$mode = 'p';
+
+	//Getting splash meme	
+	if(isset($_GET['mid'])){
+		$m = $meme -> get_meme_by_id($_GET['mid']);	
+		$mid = $_GET['mid'];
+	}else{
+		switch($mode){
+			case 'u':
+				$m = $meme-> get_memes_created($uid, 1);
+				$m = $m[0];
+				$mid = $m['id'];
+				break;
+			case 'p':
+				$m = $meme -> get_memes_popular(1);
+				$m = $m[0];
+				$mid = $m['id'];
+				break;
+		}
+	}
+
+	//checking if meme exists
+	if($m!=null):
+		$t = $template -> get_template_by_id($m['template_id']);
+
+
+	switch($mode){
+		case 'u':
+			if($uid==$_SESSION['uid'])
+				echo "<h2>Memes by you</h2>";
+			else{
+				$name = $userinfo->get_name($uid);
+				echo "<h2>Memes by ".$name."</h2>";				
+			}
+			break;
+		case 'p':
+
+			break;
+	}
 ?>
+
+	<h3>
 	<div id='memgr_container'>
 		<?php echo "<h2 style='margin:20px; width:450px; float:left'>".$m['title']."</h2>";?>
 		
-		<div id='navigation'>			
-			<a href='meme_gallery.php'><div id='browse_all' class='btn'>Browse All</div></a>
+		<div id='navigation'>
 			<div id='right_arrow'><img src='images/right_arrow.png'/></div>
 			<div id='left_arrow'><img src='images/left_arrow.png'/></div>
 		</div>
-		
 	<div class='splash panel'>
 		
 <?php
  	echo "<img src='meme_creator.php?meme=".$t['src']."&top_text=".$m['text_top']."&bottom_text=".$m['text_bot']."' meme_id='".$m['id']."' alt=\"I don't always fail to display this meme. But when I do, I display this text instead.\" />";
 
-	$groups = $meme->get_group_tags($_GET['mid']);
+	$groups = $meme->get_group_tags($mid);
 	for($i = 0; $i < count($groups); $i++){
 		$g = $group -> get_group_by_id($groups[$i]);
 		if(strlen(trim($g['groupname']))>0)
 			echo "<div type='group' class='tags no_hover'>".$g['groupname']."</div>";
 	}
-	
-	$keywords = $meme->get_keyword_tags($_GET['mid']);
+
+	$keywords = $meme->get_keyword_tags($mid);
 	for($i = 0; $i < count($keywords); $i++){
 		if(strlen(trim($keywords[$i])) > 0)
 		echo "<div type='keyword' class='tags no_hover'>#".$keywords[$i]."</div>";
 	}
 
 ?>	
-</div>
+	</div>
 
 <!-- Displaying preview panels-->
 <?php
-	if(isset($_GET['mode'])):
-		 if($_GET['mode']==='u' && isset($_GET['uid'])):
-		 	$previews = $meme->get_preview_for_uploads($_GET['uid'], $_GET['mid']);
-		 	for($i = 0; $i < 9; $i ++){
-		 		if($i<count($previews)){
-		 			$m = $previews[$i];
-		 			$t = $template -> get_template_by_id($m['template_id']);
-		 			$crop = 'image_crop.php?src='.$t['src'].'&x0='.$t['crop_x0'].'&y0='.$t['crop_y0'].'&x1='.$t['crop_x1'].'&y1='.$t['crop_y1'];
-					if(strlen(trim($m['title']))>0)
-						$texts = $m['title'];
-					else
-						$texts = $m['text_top']."\n".$m['text_bot'];
-					
-						
-					echo "<a href='/index.php?mode=u&uid=".$_GET['uid']."&mid=".$m['id']."'>";
-					echo "<div class='small panel rounded' style='background-image: url(".$crop.")'>";
-					echo "<div class='darken_hover rounded'>";
-					echo "<img title=\"".$texts."\" style='opacity:0' src='".$t['src']."'/>";
-					echo "</div></div></a>";
-					
-		 		}else{
-		 			echo "<div class='small panel rounded'><div class='darken_hover rounded'></div></div>";
-		 		}
-		 	}
-	endif;
-	endif;
+
+		switch($mode){
+			case 'u':
+			 	$previews = $meme->get_memes_created($uid, 9, $mid);
+				break;
+			case 'p':
+				$previews = $meme->get_memes_popular(9);
+				break;
+		}	
+
+
+	 for($i = 0; $i < 9; $i ++){
+		if($i<count($previews)){
+			$m = $previews[$i];
+ 			$t = $template -> get_template_by_id($m['template_id']);
+ 			$crop = 'image_crop.php?src='.$t['src'].'&x0='.$t['crop_x0'].'&y0='.$t['crop_y0'].'&x1='.$t['crop_x1'].'&y1='.$t['crop_y1'];
+			if(strlen(trim($m['title']))>0)
+				$texts = $m['title'];
+			else
+				$texts = $m['text_top']."\n".$m['text_bot'];
+
+
+			echo "<a href='/index.php?mode=u&uid=".$uid."&mid=".$m['id']."'>";
+			echo "<div class='small panel rounded' style='background-image: url(".$crop.")'>";
+			echo "<div class='darken_hover rounded'>";
+			echo "<img title=\"".$texts."\" style='opacity:0' src='".$t['src']."'/>";
+			echo "</div></div></a>";
+
+ 		}else{
+ 			echo "<div class='small panel rounded'><div class='darken_hover rounded'></div></div>";
+ 		}
+	}
 
 
 ?>
+	
 	<div id='rating_cloud'>		
 		<table>
 			<tr><td>Total Views</td><td>1392</td></tr>
@@ -113,7 +167,7 @@
 		else:
 			echo "<center><h2>This meme does not exist.</h2></center>";
 		endif;
-	endif;
+
 	include_once "common/footer.php"
 ?>
 
