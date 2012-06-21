@@ -52,25 +52,23 @@
     	
     	$user_id = $_SESSION['uid'];
     	$comment = $_POST['comment'];
-    	$meme_id = $_SESSION['meme_id'];
-		$votes = 0;
-		$reply_to = -1;
+    	$meme_id = $_GET['mid'];
+		//$votes = 0;
+		//$reply_to = -1;
     	
     	//GMT time
         date_default_timezone_set( 'Europe/London');
 		$datetime = date("Y-m-d H:i:s", mktime());
 		
 		//Insert user into database
-        $sql = "INSERT INTO comments(user, comment, meme, reply_to, votes, created_at)
-        		VALUES(:userid, :comment, :meme, :reply_to, :votes, :time)";
+        $sql = "INSERT INTO comments(user_id, text, meme_id, created_at)
+        		VALUES(:userid, :comment, :meme, :time)"; //reply_to item?
           try
           {
           	$stmt = $this->_db->prepare($sql);
             $stmt->bindParam(":userid", $user_id, PDO::PARAM_INT);
             $stmt->bindParam(":comment", $comment, PDO::PARAM_STR);
             $stmt->bindParam(":meme", $meme_id, PDO::PARAM_INT);
-            $stmt->bindParam(":reply_to", $reply_to, PDO::PARAM_INT);
-			$stmt->bindParam(":votes", $votes, PDO::PARAM_INT);
             $stmt->bindParam(":time", $datetime, PDO::PARAM_STR);
             $stmt->execute();
             $stmt->closeCursor();
@@ -87,61 +85,70 @@
     }
     
     
-    //Inserts a new vote for a comment into database and a new relation between user and comment in vote_relations. Returns if successful.
-    function vote_comment($id, $vote){
-		//retrieve votes for comment
-		$sql = "SELECT * FROM comments 
-			WHERE comment_id =:id LIMIT 1"; 
+    //Inserts a new vote for a comment into database. Returns if successful.
+    function vote_comment(){
+		//check if vote exists for comment
+		
+		
+		//if it does exist, update, if not, insert
+ 		//if ($row = $stmt->fetch())
+		
+		
+		
+    }
+	
+	//Inserts a new vote for a meme into database. Returns if successful.
+    function vote_meme(){
+		$meme_id = $_POST['mid'];
+		$user_id = $_SESSION['uid'];
+		$vote = $_POST['vote'];
+		//check if vote exists for comment
+		$sql = "SELECT * FROM memes_vote 
+			WHERE meme_id =:mid AND user_id =:uid LIMIT 1"; 
 		
 		if($stmt = $this->_db->prepare($sql)) {
-            $stmt->bindParam(":id", $id, PDO::PARAM_INT);            
+            $stmt->bindParam(":mid", $meme_id, PDO::PARAM_INT);
+			$stmt->bindParam(":uid", $user_id, PDO::PARAM_INT);               
             $stmt->execute();
-	        $row = $stmt->fetch();
- 		}
-		//new vote total
-		$votes = $row['votes'] + $vote;
-		//update the table with the new vote total
-		$sql = "UPDATE comments
-			 SET votes =:votes
-			 WHERE comment_id=:id LIMIT 1"; 
-			
-			 try{
+			//if it does exist, update, if not, insert
+            if($row = $stmt->fetch()){
+				$sql = "UPDATE memes_vote
+					SET vote =:vote
+					WHERE  meme_id=:mid AND user_id=:uid LIMIT 1";
+				try{
                 $stmt = $this->_db->prepare($sql);
-                $stmt->bindParam(":votes", $votes, PDO::PARAM_INT);
-                $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+                $stmt->bindParam(":mid", $meme_id, PDO::PARAM_INT);
+                $stmt->bindParam(":vote", $vote, PDO::PARAM_INT);
+                $stmt->bindParam(":uid", $user_id, PDO::PARAM_INT);
                 $stmt->execute();
                 $stmt->closeCursor();
-                
                 return true;
-            }
-            catch(PDOException $e)
-            {
+				}
+				catch(PDOException $e){
                 return false;
-            }
-		
-		// Add the user and comment to the vote_relations table so can't vote again
-    	//GMT time
-        date_default_timezone_set( 'Europe/London');
-		$datetime = date("Y-m-d H:i:s", mktime());
-		
-		$user_id = $_SESSION['uid'];
-		//Insert user into database
-        $sql = "INSERT INTO vote_relations(item_id, user_id, created_at)
-        		VALUES(:cid, :uid, :time)";
-          try
-          {
-          	$stmt = $this->_db->prepare($sql);
-            $stmt->bindParam(":cid", $id, PDO::PARAM_INT);
-            $stmt->bindParam(":uid", $user_id, PDO::PARAM_INT);
-            $stmt->bindParam(":time", $datetime, PDO::PARAM_STR);
-            $stmt->execute();
-            $stmt->closeCursor();
-            return true;
-        }
-        catch(PDOException $e)
-		{
+				}
+			}
+			else{
+				$sql = "INSERT INTO memes_vote(meme_id, user_id, vote)
+					VALUES(:mid, :uid, :vote)";
+				try{
+                $stmt = $this->_db->prepare($sql);
+                $stmt->bindParam(":mid", $meme_id, PDO::PARAM_INT);
+                $stmt->bindParam(":vote", $vote, PDO::PARAM_INT);
+                $stmt->bindParam(":uid", $user_id, PDO::PARAM_INT);
+                $stmt->execute();
+                $stmt->closeCursor();
+                return true;
+				}
+				catch(PDOException $e){
+                return false;
+				}
+			}
+ 		}
+		else{
 			return false;
 		}
+		
     }
     
     

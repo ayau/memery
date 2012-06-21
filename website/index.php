@@ -144,8 +144,8 @@
 		</table>
 	</div>
 	<div id='rate_share'>
-		<img src='images/upvote.png' width='30px'/>
-		<img style='position:relative; top:5px' src='images/downvote.png' width='30px'/>
+		<img id='meme_upvote' src='images/upvote.png' width='30px'/>
+		<img id='meme_downvote' style='position:relative; top:5px' src='images/downvote.png' width='30px'/>
 		<img style='margin-left:30px;' src='images/share_fb.png' width='40px'/>
 		<img src='images/share_tw.png' width='40px'/>
 	</div>
@@ -173,12 +173,36 @@
 
 <script type="text/javascript">
 
-	$("#left_arrow").live("click",function(){
-		alert('left');
-	})
-	
-	$("#right_arrow").live("click",function(){
-		alert('right');
-	})
+    $("#left_arrow").live("click",function(){
+    alert('left');
+    })
+
+    $("#right_arrow").live("click",function(){
+    alert('right');
+    })
+
+    $("#meme_upvote").live("click",function(){
+    vote(1);
+    })
+
+    $("#meme_downvote").live("click",function(){
+    vote(-1);
+    })
+
+    function vote(v){
+    meme_id = <?php echo $mid ?>;
+        $.ajax({
+        type: "POST",
+        url: "db-interaction/comments.php",
+        data: "action=vote&mid="+meme_id+
+        "&vote="+v,
+        success: function(r){
+            alert(r);
+        },
+        error:function(){
+            alert('sad panda');
+        }
+        });
+    }
 
 </script>
