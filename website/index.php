@@ -4,6 +4,8 @@
 	include_once "common/header.php";
 	include_once "inc/class.meme.inc.php";
 	$meme = new Meme();
+    include_once "inc/class.comment.inc.php";
+	$comment = new Comment();
 	include_once "inc/class.template.inc.php";
 	$template = new Template();
 	include_once "inc/class.group.inc.php";
@@ -144,6 +146,12 @@
 		</table>
 	</div>
 	<div id='rate_share'>
+        <div id='meme_vote_count'>
+            <?php 
+                $meme_votes = $comment -> get_meme_vote_count($mid);
+                echo "votes: ",$meme_votes;
+            ?>
+        </div>
 		<img id='meme_upvote' src='images/upvote.png' width='30px'/>
 		<img id='meme_downvote' style='position:relative; top:5px' src='images/downvote.png' width='30px'/>
 		<img style='margin-left:30px;' src='images/share_fb.png' width='40px'/>
@@ -154,8 +162,9 @@
 	
 	<div id='comments_container'>
 		<h2>Comments and whatnot</h2>
-		<p>mbei333: This meme sucks ass!!</p>
-		<p>alex_1337: ^ what he says</p>
+        <form method='POST' onsubmit='submit_comment()'>
+            <input id='comment_text' type='text' value='Write a comment....' onfocus='this.value=""' onblur='this.value="Write a comment...."'/>
+        </form>
 	</div>
 	
 		
@@ -182,25 +191,28 @@
     })
 
     $("#meme_upvote").live("click",function(){
-    vote(1);
+    vote_meme(1);
     })
 
     $("#meme_downvote").live("click",function(){
-    vote(-1);
+    vote_meme(-1);
     })
+    
+    function submit_comment(){
+    alert("submitted!");
+    }
 
-    function vote(v){
+    function vote_meme(v){
     meme_id = <?php echo $mid ?>;
         $.ajax({
         type: "POST",
         url: "db-interaction/comments.php",
-        data: "action=vote&mid="+meme_id+
+        data: "action=vote_meme&mid="+meme_id+
         "&vote="+v,
-        success: function(r){
-            alert(r);
+        success:function(){
         },
         error:function(){
-            alert('sad panda');
+            alert('sad panda :( there was an error in the vote. please refresh and try again.');
         }
         });
     }

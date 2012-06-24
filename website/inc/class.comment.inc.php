@@ -87,18 +87,6 @@
     
     //Inserts a new vote for a comment into database. Returns if successful.
     function vote_comment(){
-		//check if vote exists for comment
-		
-		
-		//if it does exist, update, if not, insert
- 		//if ($row = $stmt->fetch())
-		
-		
-		
-    }
-	
-	//Inserts a new vote for a meme into database. Returns if successful.
-    function vote_meme(){
 		$meme_id = $_POST['mid'];
 		$user_id = $_SESSION['uid'];
 		$vote = $_POST['vote'];
@@ -149,7 +137,79 @@
 			return false;
 		}
 		
+		
+		
     }
+	
+	//Inserts a new vote for a meme into database. Returns if successful.
+    function vote_meme(){
+		$meme_id = $_POST['mid'];
+		$user_id = $_SESSION['uid'];
+		$vote = $_POST['vote'];
+		//check if vote exists for meme
+		$sql = "SELECT * FROM memes_vote 
+			WHERE meme_id =:mid AND user_id =:uid LIMIT 1"; 
+		
+		if($stmt = $this->_db->prepare($sql)) {
+            $stmt->bindParam(":mid", $meme_id, PDO::PARAM_INT);
+			$stmt->bindParam(":uid", $user_id, PDO::PARAM_INT);               
+            $stmt->execute();
+			//if it does exist, update, if not, insert
+            if($row = $stmt->fetch()){
+				$sql = "UPDATE memes_vote
+					SET vote =:vote
+					WHERE  meme_id=:mid AND user_id=:uid LIMIT 1";
+				try{
+                $stmt = $this->_db->prepare($sql);
+                $stmt->bindParam(":mid", $meme_id, PDO::PARAM_INT);
+                $stmt->bindParam(":vote", $vote, PDO::PARAM_INT);
+                $stmt->bindParam(":uid", $user_id, PDO::PARAM_INT);
+                $stmt->execute();
+                $stmt->closeCursor();
+                return true;
+				}
+				catch(PDOException $e){
+                return false;
+				}
+			}
+			else{
+				$sql = "INSERT INTO memes_vote(meme_id, user_id, vote)
+					VALUES(:mid, :uid, :vote)";
+				try{
+                $stmt = $this->_db->prepare($sql);
+                $stmt->bindParam(":mid", $meme_id, PDO::PARAM_INT);
+                $stmt->bindParam(":vote", $vote, PDO::PARAM_INT);
+                $stmt->bindParam(":uid", $user_id, PDO::PARAM_INT);
+                $stmt->execute();
+                $stmt->closeCursor();
+                return true;
+				}
+				catch(PDOException $e){
+                return false;
+				}
+			}
+ 		}
+		else{
+			return false;
+		}
+		
+    }
+
+	function get_meme_vote_count($id){
+		$sql = "SELECT vote FROM memes_vote
+			WHERE meme_id =:mid"; 
+		
+		if($stmt = $this->_db->prepare($sql)) {
+            $stmt->bindParam(":mid", $id, PDO::PARAM_INT);            
+            $stmt->execute();
+            $votes = array();
+            while ($row = $stmt->fetch()){
+				$vote = intval($row['vote']);
+            	array_push($votes, $vote);	
+            }
+            return array_sum($votes);
+ 		}
+	}
     
     
       //Retrieves a comment by its id

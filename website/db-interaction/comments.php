@@ -12,7 +12,7 @@ if(!empty($_POST['action'])){
         case 'create_comment':
             echo $comment->create_comment();
             break;
-        case 'vote':
+        case 'vote_meme':
             echo $comment->vote_meme();
             break;
 		default:
