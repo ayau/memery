@@ -18,6 +18,9 @@ if(!empty($_POST['action'])){
         case 'insert_keyword_tags':
         	echo $meme->insert_keyword_tags();
         	break;
+        case 'inc_views':
+        	echo $meme->inc_views();
+        	break;
 		default:
             header("Location: ");
         break;

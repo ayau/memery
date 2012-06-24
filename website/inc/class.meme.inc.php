@@ -245,9 +245,9 @@
     	if ($pop==null)
     		$cutoff = "";
     	else
-    		$cutoff = "WHERE pop<".$pop;		//personalized?
+    		$cutoff = "WHERE views<".$pop;		//personalized?
     	
-        $sql = "SELECT *, created_at AS pop FROM memes 
+        $sql = "SELECT *, views AS pop FROM memes 
 			".$cutoff." ORDER BY pop DESC
 			LIMIT :lim"; 
 		
@@ -262,5 +262,51 @@
  		}
     }
     
+    function get_popularity($mid){
+    	 $sql = "SELECT views AS pop FROM memes
+    	 WHERE id =:mid LIMIT 1"; 
+		
+		if($stmt = $this->_db->prepare($sql)) {
+            $stmt->bindParam(":mid", $mid, PDO::PARAM_INT);         
+            $stmt->execute();
+			$row = $stmt->fetch();
+			return $row['pop'];
+ 		}
+    }
+    
+    function get_views($mid){
+    	$sql = "SELECT views FROM memes 
+    		WHERE id =:mid
+			LIMIT 1"; 
+		
+		if($stmt = $this->_db->prepare($sql)) {
+            $stmt->bindParam(":mid", $mid, PDO::PARAM_INT);         
+            $stmt->execute();
+			$row = $stmt->fetch();
+			return $row['views'];
+ 		}
+    }
+    
+    //Increment views by one
+    function inc_views(){
+    	$mid = $_POST['mid'];
+    	$sql = "UPDATE memes
+			 SET views = views+1 
+			 WHERE id =:mid
+			 LIMIT 1"; 
+			
+			 try{
+                $stmt = $this->_db->prepare($sql);
+                $stmt->bindParam(":mid", $mid, PDO::PARAM_INT);
+                $stmt->execute();
+                $stmt->closeCursor();
+                
+                return true;
+            }
+            catch(PDOException $e)
+            {
+                return false;
+            }
+    }
     
 }

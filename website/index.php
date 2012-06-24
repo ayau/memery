@@ -104,7 +104,8 @@
 			 	$previews = $meme->get_memes_created($uid, 9, $mid);
 				break;
 			case 'p':
-				$previews = $meme->get_memes_popular(9);
+				$popularity = $meme -> get_popularity($mid);
+				$previews = $meme->get_memes_popular(9, $popularity);
 				break;
 		}	
 
@@ -119,8 +120,10 @@
 			else
 				$texts = $m['text_top']."\n".$m['text_bot'];
 
-
-			echo "<a href='/index.php?mode=u&uid=".$uid."&mid=".$m['id']."'>";
+			if($mode === 'u')
+				echo "<a href='/index.php?mode=".$mode."&uid=".$uid."&mid=".$m['id']."'>";
+			else
+				echo "<a href='/index.php?mode=".$mode."&mid=".$m['id']."'>";
 			echo "<div class='small panel rounded' style='background-image: url(".$crop.")'>";
 			echo "<div class='darken_hover rounded'>";
 			echo "<img title=\"".$texts."\" style='opacity:0' src='".$t['src']."'/>";
@@ -136,7 +139,7 @@
 	
 	<div id='rating_cloud'>		
 		<table>
-			<tr><td>Total Views</td><td>1392</td></tr>
+			<tr><td>Total Views</td><td><?php echo $meme->get_views($mid)?></td></tr>
 			<tr><td>Rank</td><td>325</td></tr>
 			<tr><td>Viral Meter</td><td>98%</td></tr>
 			<tr><td>Date Created</td><td>05/04/12</td></tr>
@@ -180,5 +183,20 @@
 	$("#right_arrow").live("click",function(){
 		alert('right');
 	})
+	
+	
+	//Increment views after 4 seconds
+	setTimeout(function(){
+		mid = <?php echo $mid ?>;
+		$.ajax({
+		    	type: "POST",
+		       	url: "db-interaction/memes.php",
+		       	data: "action=inc_views&mid="+mid,
+		       	success: function(){
+		   		},
+		     	error:function(){}  
+  			});}, 4000);
+	
+
 
 </script>

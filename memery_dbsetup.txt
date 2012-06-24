@@ -73,6 +73,7 @@ created_at DATETIME NOT NULL,
 text_top varchar(128),
 text_bot varchar(128),
 privacy TINYINT NOT NULL default 0,
+views INT NOT NULL default 0,
 PRIMARY KEY(id),
 FOREIGN KEY(template_id) references templates(id),
 FOREIGN KEY(created_by) references users(id)
