@@ -166,7 +166,7 @@
 	<div id='comments_container'>
 		<h2>Comments and whatnot</h2>
         <form method='POST' onsubmit='submit_comment()'>
-            <input id='comment_text' type='text' value='Write a comment....' onfocus='this.value=""' onblur='this.value="Write a comment...."'/>
+            <input id='comment_text' type='text' placeholder='Write a comment...'/>
         </form>
 	</div>
 	
