@@ -3,14 +3,17 @@
 session_start();
  
 include_once "../inc/constants.inc.php";
-include_once "../inc/class.comments.inc.php";
+include_once "../inc/class.comment.inc.php";
 $comment = new Comment();
 
 if(!empty($_POST['action'])){
 	switch($_POST['action'])
     {
         case 'create_comment':
-            echo $group->create_comment();
+            echo $comment->create_comment();
+            break;
+        case 'vote_meme':
+            echo $comment->vote_meme();
             break;
 		default:
             header("Location: ");
